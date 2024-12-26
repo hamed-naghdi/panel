@@ -16,7 +16,9 @@
     align-self: stretch;
   }
 
-  .version {
-
+  .version-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
