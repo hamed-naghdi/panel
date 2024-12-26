@@ -1,0 +1,14 @@
+@use "../../../../public/fonts/Inter-4.0/web/inter.css";
+
+:root {
+  --font-fallback: 'Segoe UI';
+
+  font-family: 'Inter', var(--font-fallback);
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: 'InterVariable', var(--font-fallback);
+    font-optical-sizing: auto;
+  }
+}

@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {LogoComponent} from './shared/layout/logo/logo.component';
+import {SidebarComponent} from './shared/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'hami-admin',
   imports: [
     RouterOutlet,
-    LogoComponent
+    SidebarComponent
   ],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrls: [
+    './admin.panel.scss',
+    './admin.component.scss',
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminComponent {
 

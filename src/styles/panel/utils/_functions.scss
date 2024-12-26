@@ -1,0 +1,9 @@
+@use "sass:math";
+
+@function hamiRound($w, $sw) {
+  @return math.div(round(math.div($w, $sw) * 100 * 100), 100);
+}
+
+@function hamiCalc($w, $sw) {
+  @return calc(hamiRound($w, $sw) * 1%);
+}
