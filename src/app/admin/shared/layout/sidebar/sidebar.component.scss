@@ -1,6 +1,6 @@
 $padding: 32px;
 
-.sidebar {
+.sidebar-wrapper {
   padding: $padding;
   display: flex;
   flex-direction: column;
@@ -9,4 +9,16 @@ $padding: 32px;
 
   height: 100%;
   min-height: calc(100vh - 2 * $padding);
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
+    align-self: stretch;
+  }
+
+  .version {
+
+  }
 }

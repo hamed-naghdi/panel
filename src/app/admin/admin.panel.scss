@@ -1,2 +1,8 @@
 @use "../../styles/panel/themes/fonts";
 @use "../../styles/panel/base/typography";
+
+body {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}

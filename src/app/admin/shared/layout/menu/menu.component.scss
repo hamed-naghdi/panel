@@ -1,0 +1,45 @@
+@use "../../../../../styles/panel/abstracts/variables" as var;
+
+:host {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .section {
+    display: flex;
+    padding: 6px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+
+    .item {
+      display: flex;
+      padding: 6px 8px;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+
+      border-radius: 6px;
+      font-weight: 500;
+
+      &.title {
+        font-weight: 600;
+        color: var.$slate-600;
+      }
+
+      &.active {
+        background-color: #f1f5f9;
+      }
+
+      .icon-container {
+        .icon {
+          position: initial !important;
+        }
+      }
+    }
+  }
+}

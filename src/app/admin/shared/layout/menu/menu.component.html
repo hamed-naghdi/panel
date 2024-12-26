@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <section class="section">
+    <div class="item title">Allgemein</div>
+    <a class="item" [routerLink]="['dashboard']" routerLinkActive="active">
+      <div class="icon-container">
+        <img class="icon" ngSrc="/images/icons/menu/dashboard.svg" alt="dashboard" fill>
+      </div>
+      <div>Dashboard</div>
+    </a>
+    <a class="item" [routerLink]="['media']" routerLinkActive="active">
+      <div class="icon-container">
+        <img class="icon" ngSrc="/images/icons/menu/media.svg" alt="media" fill>
+      </div>
+      <div>Medien</div>
+    </a>
+    <a class="item" [routerLink]="['pages']" routerLinkActive="active">
+      <div class="icon-container">
+        <img class="icon" ngSrc="/images/icons/menu/page.svg" alt="pages" fill>
+      </div>
+      <div>Seiten</div>
+    </a>
+    <a class="item" [routerLink]="['components']" routerLinkActive="active">
+      <div class="icon-container">
+        <img class="icon" ngSrc="/images/icons/menu/components.svg" alt="components" fill>
+      </div>
+      <div>Komponenten</div>
+    </a>
+  </section>
+</div>
