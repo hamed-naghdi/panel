@@ -14,6 +14,10 @@ export const adminRoutes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+      },
+      {
+        path: 'media',
+        loadComponent: () => import('./media/media.component').then(m => m.MediaComponent),
       }
     ]
   },
