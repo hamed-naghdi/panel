@@ -1,0 +1,11 @@
+@use "../../../../../styles/panel/abstracts/variables" as var;
+
+.header {
+  $header-padding: var.$secondary-padding var.$primary-padding;
+  .top-bar {
+    padding: $header-padding;
+  }
+  .search-bar {
+    padding: $header-padding;
+  }
+}

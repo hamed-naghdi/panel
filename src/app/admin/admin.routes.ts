@@ -5,6 +5,7 @@ export const adminRoutes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    // data: { breadcrumb: 'Admin' },
     children: [
       {
         path: '',
@@ -14,10 +15,18 @@ export const adminRoutes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+        data: {
+          breadcrumb: 'Dashboard',
+          search: false,
+        },
       },
       {
         path: 'media',
         loadComponent: () => import('./media/media.component').then(m => m.MediaComponent),
+        data: {
+          breadcrumb: 'Medien',
+          search: true,
+        },
       }
     ]
   },
