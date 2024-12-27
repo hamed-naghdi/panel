@@ -3,3 +3,15 @@
 </h1>
 
 <button hlmBtn variant="destructive">From dashboard (shadcn)</button>
+
+<div class="card flex justify-center">
+  <p-button label="Check" />
+</div>
+
+<div class="card flex justify-center">
+  <p-togglebutton [(ngModel)]="checked" onLabel="Locked" offLabel="Unlocked" onIcon="pi pi-check" offIcon="pi pi-times" onIcon="pi pi-lock" offIcon="pi pi-lock-open" styleClass="w-36" ariaLabel="Do you confirm" />
+</div>
+
+<div class="card">
+  <p-tree [value]="files" styleClass="w-full md:w-[30rem]" />
+</div>
