@@ -4,11 +4,15 @@ import {ActivatedRoute} from '@angular/router';
 import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
 import {Subscription} from 'rxjs';
 import {SearchService} from '../../../../core/services/search.service';
+import {NgOptimizedImage} from '@angular/common';
+import {SearchComponent} from '../../search/search.component';
 
 @Component({
   selector: 'hami-header',
   imports: [
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    NgOptimizedImage,
+    SearchComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

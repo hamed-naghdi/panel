@@ -1,12 +1,21 @@
 <div class="header">
   <div class="top-bar">
     <div class="breadcrumb-wrapper"><hami-breadcrumb /></div>
-    <div class="user-info-wrapper"></div>
+    <div class="user-info-wrapper">
+      <div class="bell-button">
+        <img ngSrc="/images/icons/common/bell.svg" alt="notifications" width="16" height="16"/>
+        <img class="status" ngSrc="/images/icons/common/circle-green.svg" alt="status" width="8" height="8"/>
+      </div>
+      <div class="user-wrapper">
+        <img ngSrc="/images/catalin.png" alt="user" width="40" height="40"/>
+        <img ngSrc="/images/icons/common/chevron-down.svg" alt="arrow-down" width="24" height="24"/>
+      </div>
+    </div>
   </div>
   <hr />
   @if (isSearchable){
     <div class="search-bar">
-      search zone!
+      <hami-search />
     </div>
   }
 </div>

@@ -1,0 +1,69 @@
+@use "../../../../styles/panel/abstracts/variables" as var;
+
+.search-wrapper {
+  display: flex;
+  align-content: flex-start;
+  gap: var.$primary-gap;
+  flex-wrap: wrap;
+
+  .search-container {
+    display: flex;
+    min-width: 350px;
+    max-width: 504px;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 0;
+
+    border-radius: 6px;
+    border: 1px solid var.$slate-300;
+
+    .search-input-wrapper {
+      width: 100%;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      padding: 0 8px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+
+      .search-input-container {
+        width: 100%;
+        display: flex;
+        padding: 10px 8px;
+        align-items: center;
+        gap: 8px;
+
+        .search-input {
+          flex: 1 0 0;
+          color: var.$slate-500;
+          width: 100%;
+
+          &:focus, :focus-visible, :focus-within {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+
+  .filter-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .filter-button {
+      display: flex;
+      padding: 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+
+      border-radius: 6px;
+      border: 1px solid var.$slate-200;
+      background: var.$white;
+    }
+    .filter-label {
+      font-weight: 500;
+    }
+  }
+}

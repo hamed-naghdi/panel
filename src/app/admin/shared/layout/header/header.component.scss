@@ -4,8 +4,55 @@
   $header-padding: var.$secondary-padding var.$primary-padding;
   .top-bar {
     padding: $header-padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+
+    .user-info-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 24px;
+
+      .bell-button {
+        display: flex;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border-radius: 6px;
+        border: 1px solid var.$slate-300;
+        background: var.$white;
+
+        position: relative;
+
+        .status {
+          position: absolute;
+          top: -4px;
+          right: -4px;
+
+          fill: var.$emerald-600;
+          stroke-width: 2px;
+          stroke: var.$white;
+        }
+      }
+
+      .user-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
   }
   .search-bar {
     padding: $header-padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    row-gap: 64px;
+    align-self: stretch;
+    flex-wrap: wrap;
   }
 }
