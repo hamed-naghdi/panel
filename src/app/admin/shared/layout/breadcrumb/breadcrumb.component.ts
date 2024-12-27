@@ -17,7 +17,7 @@ import {NgOptimizedImage} from '@angular/common';
 })
 export class BreadcrumbComponent implements OnInit, OnDestroy {
   breadcrumbs: Array<IBreadcrumb> = [];
-  navEndSubscription: Subscription | undefined;
+  breadcrumbSubscription: Subscription | undefined;
 
   title: string = '';
   back?: IBreadcrumb;
@@ -26,20 +26,31 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.navEndSubscription = this.breadcrumbService.navigationEnd$?.subscribe(() => {
-      this.breadcrumbs = this.breadcrumbService.createBreadcrumb(this.activatedRoute.root)
-      // console.log('breadcrumb', this.breadcrumbs);
+
+    // Check on initial load
+    this.breadcrumbs = this.breadcrumbService.createBreadcrumb(this.activatedRoute);
+    this.updateBreadcrumbsView()
+
+    // Subscribe to router events for dynamic navigation updates
+    this.breadcrumbSubscription = this.breadcrumbService.getBreadcrumbs$()
+      .subscribe((breadcrumbs: Array<IBreadcrumb>) => {
+        this.breadcrumbs = breadcrumbs;
+
+        this.updateBreadcrumbsView()
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.breadcrumbSubscription) {
+      this.breadcrumbSubscription.unsubscribe();
+    }
+  }
+
+  private updateBreadcrumbsView() {
       if (this.breadcrumbs.length > 0)
         this.title = this.breadcrumbs[this.breadcrumbs.length - 1].label;
 
       if (this.breadcrumbs.length > 1)
         this.back = this.breadcrumbs[this.breadcrumbs.length - 2]
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.navEndSubscription) {
-      this.navEndSubscription.unsubscribe();
-    }
   }
 }

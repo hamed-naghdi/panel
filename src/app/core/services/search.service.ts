@@ -5,11 +5,11 @@ import {filter, map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class RoutingService {
+export class SearchService {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  public hasSearch() {
+  public hasSearch$() {
     return this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => this.isSearchable())

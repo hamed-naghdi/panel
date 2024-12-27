@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {IBreadcrumb} from '../interfaces/breadcrumb';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreadcrumbService {
-  navigationEnd$: Observable<NavigationEnd> | null = null;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  }
 
-  constructor(private router: Router) {
-    this.navigationEnd$ = this.router.events.pipe(
+  public getBreadcrumbs$(): Observable<IBreadcrumb[]> {
+    return this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      // tap((event: NavigationEnd) => {
-      //   console.log(event);
-      // })
-    );
+      map(() => this.createBreadcrumb(this.activatedRoute))
+    )
   }
 
   public createBreadcrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Array<IBreadcrumb> = []): Array<IBreadcrumb> {

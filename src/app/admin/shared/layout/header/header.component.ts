@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription, toArray} from 'rxjs';
+import {NgOptimizedImage} from '@angular/common';
 
 import {BreadcrumbComponent} from '../breadcrumb/breadcrumb.component';
 import {SearchComponent} from '../../search/search.component';
-import {RoutingService} from '../../../../core/services/routing.service';
-import {NgOptimizedImage} from '@angular/common';
+import {SearchService} from '../../../../core/services/search.service';
 
 @Component({
   selector: 'hami-header',
@@ -21,16 +20,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isSearchable = false;
   searchSubscription: Subscription | undefined = undefined;
 
-  constructor(private routingService: RoutingService,) {
+  constructor(private searchService: SearchService,) {
   }
 
   ngOnInit(): void {
 
     // Check on initial load
-    this.isSearchable = this.routingService.isSearchable()
+    this.isSearchable = this.searchService.isSearchable()
 
     // Subscribe to router events for dynamic navigation updates
-    this.searchSubscription = this.routingService.hasSearch()
+    this.searchSubscription = this.searchService.hasSearch$()
       .subscribe((result) => {
         this.isSearchable = result;
       });
