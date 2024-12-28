@@ -1,16 +1,18 @@
-<div class="search-wrapper">
-  <div class="search-container">
-    <div class="search-input-wrapper">
-      <div class="search-input-container">
-        <img ngSrc="/images/icons/common/search.svg" alt="arrow-down" width="16" height="16"/>
-        <input type="search" class="search-input" autocomplete="off" placeholder="Medien durchsuchen...">
+@if (isSearchable){
+  <div class="search-wrapper">
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <div class="search-input-container">
+          <img ngSrc="/images/icons/common/search.svg" alt="arrow-down" width="16" height="16"/>
+          <input type="search" class="search-input" autocomplete="off" placeholder="Medien durchsuchen...">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="filter-container">
-    <div class="filter-button">
-      <img ngSrc="/images/icons/common/filter.svg" alt="filter" width="16" height="16"/>
+    <div class="filter-container">
+      <div class="filter-button">
+        <img ngSrc="/images/icons/common/filter.svg" alt="filter" width="16" height="16"/>
+      </div>
+      <label class="filter-label">Filtern</label>
     </div>
-    <label class="filter-label">Filtern</label>
   </div>
-</div>
+}

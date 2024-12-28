@@ -1,6 +1,8 @@
 @use "../../../../styles/panel/abstracts/variables" as var;
 
+$header-padding: var.$secondary-padding var.$primary-padding;
 .search-wrapper {
+  padding: $header-padding;
   display: flex;
   align-content: flex-start;
   gap: var.$primary-gap;
