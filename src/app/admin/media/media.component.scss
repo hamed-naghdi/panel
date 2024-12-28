@@ -1,0 +1,21 @@
+@use "../../../styles/panel/abstracts/variables" as var;
+
+.media-wrapper {
+  display: flex;
+  align-items: flex-start;
+
+  .tree-section-wrapper {
+    border-right: 1px solid var.$slate-300;
+    background: var.$white;
+
+    display: flex;
+    padding: var.$primary-padding;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var.$secondary-gap;
+  }
+
+  .media-items-wrapper {
+    min-height: 1200px;
+  }
+}

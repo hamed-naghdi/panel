@@ -3,25 +3,28 @@
 @use "../../styles/panel/abstracts/variables" as var;
 @use "../../styles/panel/utils/functions" as fn;
 
-.admin-layout-wrapper{
-  display: flex;
-  align-items: flex-start;
+$sidebar-width: 263px;
+.sidebar {
+  grid-area: sidebar;
+  max-width: $sidebar-width + 1px;
+  border-right: 1px solid var.$gray;
+}
+
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.layout {
+  display: grid;
   max-width: var.$desktop-max;
-  width: 100%;
-
-  $sidebar-width: 263px;
-  .main-sidebar{
-    max-width: $sidebar-width + 1px;
-    flex: 0 0 $sidebar-width;
-    border-right: 1px solid #D4DADD;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    min-height: 100vh;
-  }
-  .main-wrapper{
-    flex: 1;
-  }
+  min-height: 100vh;
+  grid-template-columns: minmax(200px, $sidebar-width) 1fr;
+  grid-template-rows: calc(40px + 2 * var.$secondary-padding) 1fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
 }
