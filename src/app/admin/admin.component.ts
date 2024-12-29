@@ -1,9 +1,10 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {Toast} from 'primeng/toast';
+
 import {SidebarComponent} from './shared/layout/sidebar/sidebar.component';
 import {HeaderComponent} from './shared/layout/header/header.component';
 import {SearchComponent} from './shared/search/search.component';
-import {Toast} from 'primeng/toast';
 
 @Component({
   selector: 'hami-admin',
