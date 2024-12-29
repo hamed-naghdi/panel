@@ -23,7 +23,8 @@ $sidebar-width: 263px;
   max-width: var.$desktop-max;
   min-height: 100vh;
   grid-template-columns: minmax(200px, $sidebar-width) 1fr;
-  grid-template-rows: calc(40px + 2 * var.$secondary-padding) 1fr;
+  $p2: 2 * var.$secondary-padding;
+  grid-template-rows: calc(40px + $p2) 1fr;
   grid-template-areas:
     'sidebar header'
     'sidebar content';

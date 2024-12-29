@@ -1,21 +1,21 @@
 @use "../../../styles/panel/abstracts/variables" as var;
 
-.media-wrapper {
-  display: flex;
-  align-items: flex-start;
+.tree {
+  grid-area: tree;
+  min-height: 100vh;
 
-  .tree-section-wrapper {
-    border-right: 1px solid var.$slate-300;
-    background: var.$white;
+  border-right: 1px solid var.$slate-300;
+  background: var.$white;
+}
 
-    display: flex;
-    padding: var.$primary-padding;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var.$secondary-gap;
-  }
+.media {
+  grid-area: media;
+  min-height: 1200px;
+}
 
-  .media-items-wrapper {
-    min-height: 1200px;
-  }
+.wrapper {
+  display: grid;
+  $p2: 2 * var.$primary-padding;
+  grid-template-columns: calc(212px + $p2) 1fr;
+  grid-template-areas: 'tree media'
 }

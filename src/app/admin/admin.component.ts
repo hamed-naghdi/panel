@@ -3,6 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {SidebarComponent} from './shared/layout/sidebar/sidebar.component';
 import {HeaderComponent} from './shared/layout/header/header.component';
 import {SearchComponent} from './shared/search/search.component';
+import {Toast} from 'primeng/toast';
 
 @Component({
   selector: 'hami-admin',
@@ -10,7 +11,8 @@ import {SearchComponent} from './shared/search/search.component';
     RouterOutlet,
     SidebarComponent,
     HeaderComponent,
-    SearchComponent
+    SearchComponent,
+    Toast
   ],
   templateUrl: './admin.component.html',
   styleUrls: [

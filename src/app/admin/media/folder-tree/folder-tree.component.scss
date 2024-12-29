@@ -1,0 +1,41 @@
+@use "../../../../styles/panel/abstracts/variables" as var;
+
+:host ::ng-deep .hami-folder-tree {
+  &.p-tree {
+    padding: 0 !important;
+
+    .p-tree-node-content {
+      padding: 0 !important;
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  padding: var.$primary-padding;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var.$secondary-gap;
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: var.$primary-gap;
+    align-self: stretch;
+
+    .title {
+      color: var.$slate-900;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 18px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 8px;
+    }
+  }
+  .body {
+  }
+}

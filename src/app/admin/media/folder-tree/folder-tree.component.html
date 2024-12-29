@@ -1,1 +1,19 @@
-<p>folder-tree works!</p>
+<div class="wrapper">
+  <div class="header">
+    <label class="title">Ordner</label>
+    <button class="btn" hlmBtn variant="destructive">
+      <img class="icon" ngSrc="/images/icons/common/folder-plus.svg" alt="create folder" width="16" height="16" />
+      Erstellen
+    </button>
+  </div>
+  <div class="body">
+    <p-tree [value]="files"
+            styleClass="w-full hami-folder-tree"
+            selectionMode="single"
+            [(selection)]="selectedFile"
+            (onNodeExpand)="nodeExpand($event)"
+            (onNodeCollapse)="nodeCollapse($event)"
+            (onNodeSelect)="nodeSelect($event)"
+            (onNodeUnselect)="nodeUnselect($event)" />
+  </div>
+</div>
