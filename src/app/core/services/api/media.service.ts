@@ -3,10 +3,12 @@ import {HttpClient, HttpContext, HttpParams} from '@angular/common/http';
 import {delay, map, retry} from 'rxjs/operators';
 import {catchError, Observable, of, tap} from 'rxjs';
 
-import {IDirectory} from '../../interfaces/media/IDirectory';
+import {IDirectory} from '../../interfaces/media/directory';
 import {IApiResult} from '../../interfaces/IApiResult';
 import {LoadingService} from '../loading.service';
 import {SkipLoading} from '../../interceptors/loading.interceptor';
+import {LoggerService} from '../logger.service';
+import {ITree} from '../../interfaces/media/tree';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +16,10 @@ import {SkipLoading} from '../../interceptors/loading.interceptor';
 export class MediaService {
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly loadingService: LoadingService,) {
+              private readonly loggerService: LoggerService,) {
   }
 
   getDirectory(directoryPath: string): Observable<IApiResult<IDirectory>> {
-    // this.loadingService.loadingOn()
     const options = {
       context: new HttpContext().set(SkipLoading, true),
       params: new HttpParams().set('directoryPath', directoryPath),
@@ -26,10 +27,23 @@ export class MediaService {
 
     return this.httpClient
       .get<IApiResult<IDirectory>>(`media/directory/get`, options).pipe(
-        // delay(2000),
+        delay(2000),
         retry(3),
         catchError(this.handleError())
       );
+  }
+
+  convertDirectoryDataToTreeNode(data: IDirectory | undefined, key: string): ITree[] | undefined {
+    return data?.directories?.map((item) => {
+      return {
+        key: `${key}${item}/`,
+        label: item,
+        data: item,
+        icon: 'pi pi-folder',
+        leaf: false,
+        loading: false,
+      }
+    })
   }
 
   createDirectory(path: string): Observable<void> {
@@ -49,9 +63,10 @@ export class MediaService {
 
   private handleError() {
     return (error: any) => {
-      console.error('API error:', error);
+      this.loggerService.error(error);
       // this.messageService.add({ severity: 'error', summary: `Error Happened`, detail: `No details found.` });
-      return of(error);
+      // return of(error);
+      throw error;
     };
   }
 }

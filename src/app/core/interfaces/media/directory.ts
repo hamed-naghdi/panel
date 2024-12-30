@@ -1,4 +1,4 @@
-import {IFile} from './IFile';
+import {IFile} from './file';
 
 export interface IDirectory {
   directoryPath: string;

@@ -12,6 +12,8 @@ import {Tree} from 'primeng/tree';
 
 import { environment } from '../../../../environments/environment';
 import {MediaService} from '../../../core/services/api/media.service';
+import {TreeService} from '../../../core/services/tree.service';
+import {LoggerService} from '../../../core/services/logger.service';
 
 @Component({
   selector: 'hami-folder-tree',
@@ -37,14 +39,16 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   ])
 
 
-  getDirectorSubscription: Subscription | undefined;
+  getDirectorySubscription: Subscription | undefined;
 
-  directories: TreeNode[] = [];
+  tree: TreeNode[] = [];
 
   selectedFolder?: TreeNode;
 
   constructor(private messageService: MessageService,
               private mediaService: MediaService,
+              private treeService: TreeService,
+              private loggerService: LoggerService,
               private cd: ChangeDetectorRef) {
 
     this.createFolderGroup = new FormGroup({
@@ -53,14 +57,14 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.directories = this.initiateTree();
-    this.directories.map((node) => (node.loading = false));
+    this.tree = this.initiateTree();
+    this.tree.map((node) => (node.loading = false));
     this.cd.markForCheck();
   }
 
   ngOnDestroy(): void {
-    if (this.getDirectorSubscription) {
-      this.getDirectorSubscription.unsubscribe();
+    if (this.getDirectorySubscription) {
+      this.getDirectorySubscription.unsubscribe();
     }
   }
 
@@ -69,7 +73,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
       {
         key: '/',
         label: 'root',
-        data: '',
+        data: '/',
         icon: 'pi pi-folder',
         leaf: false,
         loading: true,
@@ -104,21 +108,27 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   nodeExpand(event: any) {
     // this.messageService.add({ severity: 'success', summary: 'Node Expanded', detail: `${event.node.label} | ${event.node.data}` });
 
-    console.log('nodeExpand', event.node.key);
+    this.loggerService.log('nodeExpand', event.node.key);
+    this.loggerService.log(event.node.children)
+
 
     if (!event.node.children) {
       let _key = event.node.key;
       if (!_key)
         _key = '/';
 
-      const node = this.directories.find((item) => item.key === _key);
+      this.loggerService.log(this.tree)
+
+      //this.tree.find((item) => item.key === _key);
+      const node = event.node;
 
       if (!node)
         return;
 
-      event.node.loading = true;
+      // event.node.loading = true;
+      node.loading = true;
 
-      this.getDirectorSubscription = this.mediaService.getDirectory(_key).subscribe({
+      this.getDirectorySubscription = this.mediaService.getDirectory(_key).subscribe({
         next: (apiResult) => {
           if (!apiResult.succeeded) {
             event.node.loading = false;
@@ -136,23 +146,14 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
             }
             return;
           }
-
-          let _node = { ...event.node };
-          _node.children = apiResult.data?.directories?.map((item) => {
-            return {
-              key: `${_key}${item}/`,
-              label: item,
-              data: item,
-              icon: 'pi pi-folder',
-              leaf: false,
-              loading: false,
-            }
-          })
-          node.children = _node.children;
-          event.node.loading = false;
+          const children = this.mediaService.convertDirectoryDataToTreeNode(apiResult.data, _key);
+          this.treeService.updateNode(node, children);
           this.cd.markForCheck();
         },
-        error: (err) => { console.error(err); },
+        error: (err) => {
+          node.loading = false;
+          this.messageService.add({ severity: 'error', summary: `Server is unavailable`, detail: `try again later` });
+        },
         complete: () => {}
       })
     }
