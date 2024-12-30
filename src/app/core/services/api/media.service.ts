@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {filter, map, retry} from 'rxjs/operators';
+import {HttpClient, HttpContext, HttpParams} from '@angular/common/http';
+import {delay, map, retry} from 'rxjs/operators';
 import {catchError, Observable, of, tap} from 'rxjs';
-import { MessageService } from 'primeng/api';
 
 import {IDirectory} from '../../interfaces/media/IDirectory';
 import {IApiResult} from '../../interfaces/IApiResult';
+import {LoadingService} from '../loading.service';
+import {SkipLoading} from '../../interceptors/loading.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,19 @@ import {IApiResult} from '../../interfaces/IApiResult';
 export class MediaService {
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly messageService: MessageService) {
+              private readonly loadingService: LoadingService,) {
   }
 
   getDirectory(directoryPath: string): Observable<IApiResult<IDirectory>> {
+    // this.loadingService.loadingOn()
     const options = {
+      context: new HttpContext().set(SkipLoading, true),
       params: new HttpParams().set('directoryPath', directoryPath),
     }
 
     return this.httpClient
       .get<IApiResult<IDirectory>>(`media/directory/get`, options).pipe(
+        // delay(2000),
         retry(3),
         catchError(this.handleError())
       );

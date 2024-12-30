@@ -4,10 +4,11 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
 import { MessageService } from 'primeng/api';
-
 import { routes } from './app.routes';
-import {apiInterceptor} from './core/interceptors/api.interceptor';
 import {primeNgConfig} from './primeNgConfig';
+
+import {apiInterceptor} from './core/interceptors/api.interceptor';
+import {loadingInterceptor} from './core/interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     MessageService,
     provideHttpClient(withInterceptors([
-      apiInterceptor
+      apiInterceptor,
+      loadingInterceptor,
     ])),
     provideAnimations(),
     providePrimeNG({

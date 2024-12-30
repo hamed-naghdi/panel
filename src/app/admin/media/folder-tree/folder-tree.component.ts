@@ -120,8 +120,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
       this.getDirectorSubscription = this.mediaService.getDirectory(_key).subscribe({
         next: (apiResult) => {
-          if (!apiResult.succeeded)
-          {
+          if (!apiResult.succeeded) {
             event.node.loading = false;
             const errors = apiResult.errors;
             if (!errors)

@@ -1,0 +1,9 @@
+@if (loading$ | async) {
+  <div class="spinner-container">
+    @if (loadingIndicator) {
+      <ng-container *ngTemplateOutlet="loadingIndicator" />
+    } @else {
+      <p-progress-spinner ariaLabel="loading" />
+    }
+  </div>
+}
