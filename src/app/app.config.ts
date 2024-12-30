@@ -3,11 +3,11 @@ import { provideRouter } from '@angular/router';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
-import Aura from '@primeng/themes/aura';
 import { MessageService } from 'primeng/api';
 
 import { routes } from './app.routes';
 import {apiInterceptor} from './core/interceptors/api.interceptor';
+import {primeNgConfig} from './primeNgConfig';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: primeNgConfig,
         options: {
           darkModeSelector: false
         }

@@ -1,13 +1,29 @@
+<p-dialog header="Create Folder"
+          [position]="'top'"
+          [modal]="true"
+          [(visible)]="visibleCreateFolderDialog">
+  <span class="p-text-secondary block mb-8">Create new folder.</span>
+  <form [formGroup]="createFolderGroup" (ngSubmit)="createFolder()">
+    <div class="flex items-center gap-4 mb-4">
+      <p-floatlabel>
+        <input id="newFolderName" autocomplete="off" pInputText [formControl]="newFolderName" />
+        <label for="newFolderName">folder name</label>
+      </p-floatlabel>
+    </div>
+    <div class="flex justify-end gap-2">
+      <p-button label="Cancel" severity="secondary" (click)="visibleCreateFolderDialog = false" />
+      <p-button label="Save" type="submit" [disabled]="!createFolderGroup.valid" />
+    </div>
+  </form>
+</p-dialog>
+
 <div class="wrapper">
   <div class="header">
     <label class="title">Ordner</label>
-    <button class="btn" hlmBtn variant="destructive"
-            [disabled]="!selectedFolder"
-            (click)="createFolder()"
-    >
+    <p-button (click)="openDialog()" [disabled]="!selectedFolder">
       <i class="pi pi-folder-plus"></i>
       Erstellen
-    </button>
+    </p-button>
   </div>
   <div class="body">
     <p-tree [value]="directories"

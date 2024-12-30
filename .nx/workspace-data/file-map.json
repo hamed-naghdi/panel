@@ -1,0 +1,1227 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.3.0",
+  "pathMappings": {
+    "@spartan-ng/ui-button-helm": [
+      "./libs/ui/ui-button-helm/src/index.ts"
+    ],
+    "@spartan-ng/ui-dialog-helm": [
+      "./libs/ui/ui-dialog-helm/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "cimdata-front": [
+        {
+          "file": ".editorconfig",
+          "hash": "4165385352547808172"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "18168400278403753650"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "5331566439708925252"
+        },
+        {
+          "file": ".vscode/launch.json",
+          "hash": "17038929134016848735"
+        },
+        {
+          "file": ".vscode/tasks.json",
+          "hash": "5336636969995539451"
+        },
+        {
+          "file": "README.md",
+          "hash": "3907175976063478307"
+        },
+        {
+          "file": "angular.json",
+          "hash": "9271633611923322776"
+        },
+        {
+          "file": "components.json",
+          "hash": "3089158842223537119"
+        },
+        {
+          "file": "libs/ui/ui-button-helm/src/index.ts",
+          "hash": "17251273102492170138"
+        },
+        {
+          "file": "libs/ui/ui-button-helm/src/lib/hlm-button.directive.ts",
+          "hash": "942478299884707096"
+        },
+        {
+          "file": "libs/ui/ui-button-helm/src/lib/hlm-button.token.ts",
+          "hash": "7896754714560199098"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/index.ts",
+          "hash": "933315377037635710"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-close.directive.ts",
+          "hash": "17866661867509768723"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-content.component.ts",
+          "hash": "15308742447632366870"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-description.directive.ts",
+          "hash": "13332629126814946278"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-footer.component.ts",
+          "hash": "8998691143250607769"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-header.component.ts",
+          "hash": "7114877699117126652"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-overlay.directive.ts",
+          "hash": "14546294629942273129"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog-title.directive.ts",
+          "hash": "2900216565697868103"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog.component.ts",
+          "hash": "5946376749291448743"
+        },
+        {
+          "file": "libs/ui/ui-dialog-helm/src/lib/hlm-dialog.service.ts",
+          "hash": "504904143432558900"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "4009298743356546050"
+        },
+        {
+          "file": "package.json",
+          "hash": "18118670678472656839",
+          "deps": [
+            "npm:@angular-devkit/build-angular",
+            "npm:@angular/cli",
+            "npm:@angular/compiler-cli",
+            "npm:@spartan-ng/cli",
+            "npm:@types/jasmine",
+            "npm:autoprefixer",
+            "npm:jasmine-core",
+            "npm:karma",
+            "npm:karma-chrome-launcher",
+            "npm:karma-coverage",
+            "npm:karma-jasmine",
+            "npm:karma-jasmine-html-reporter",
+            "npm:postcss",
+            "npm:tailwind-merge",
+            "npm:tailwindcss",
+            "npm:tailwindcss-animate",
+            "npm:typescript",
+            "npm:@angular/animations",
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/compiler",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
+            "npm:@angular/platform-browser-dynamic",
+            "npm:@angular/router",
+            "npm:@ng-icons/lucide",
+            "npm:@primeng/themes",
+            "npm:@spartan-ng/brain",
+            "npm:@spartan-ng/ui-core",
+            "npm:class-variance-authority",
+            "npm:clsx",
+            "npm:primeicons",
+            "npm:primeng",
+            "npm:rxjs",
+            "npm:tslib",
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "public/favicon.ico",
+          "hash": "3988961587069885523"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/Inter.ttc",
+          "hash": "4800871270149586629"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/InterVariable-Italic.ttf",
+          "hash": "4015127044467164338"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/InterVariable.ttf",
+          "hash": "10984203769403603975"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/LICENSE.txt",
+          "hash": "9004727727591087268"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Black.otf",
+          "hash": "3118644544375732927"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-BlackItalic.otf",
+          "hash": "3266122071395633076"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Bold.otf",
+          "hash": "12455994711955824560"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-BoldItalic.otf",
+          "hash": "6104794044840685950"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-ExtraBold.otf",
+          "hash": "15219657107762618454"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-ExtraBoldItalic.otf",
+          "hash": "944100042749933078"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-ExtraLight.otf",
+          "hash": "11485490422102124955"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-ExtraLightItalic.otf",
+          "hash": "11122209779945716620"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Italic.otf",
+          "hash": "2254830495163712447"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Light.otf",
+          "hash": "2161345164594101370"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-LightItalic.otf",
+          "hash": "2117862917955437239"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Medium.otf",
+          "hash": "13903041436667493507"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-MediumItalic.otf",
+          "hash": "8720488317060651202"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Regular.otf",
+          "hash": "9438637357218944098"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-SemiBold.otf",
+          "hash": "12718728165582852170"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-SemiBoldItalic.otf",
+          "hash": "16229962602068754295"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-Thin.otf",
+          "hash": "9768390611313608596"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/Inter-ThinItalic.otf",
+          "hash": "10005325157750650967"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Black.otf",
+          "hash": "7772283811792649521"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-BlackItalic.otf",
+          "hash": "11612356186723104176"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Bold.otf",
+          "hash": "18158159922482900185"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-BoldItalic.otf",
+          "hash": "14937226627636340595"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-ExtraBold.otf",
+          "hash": "358887753525454204"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-ExtraBoldItalic.otf",
+          "hash": "8000276343357394942"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-ExtraLight.otf",
+          "hash": "14467957156891535314"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-ExtraLightItalic.otf",
+          "hash": "15065036040162301739"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Italic.otf",
+          "hash": "14263463874545386529"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Light.otf",
+          "hash": "14657634618561360548"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-LightItalic.otf",
+          "hash": "7905386346774899270"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Medium.otf",
+          "hash": "16403961451957080208"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-MediumItalic.otf",
+          "hash": "2992837504541647659"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Regular.otf",
+          "hash": "13884903218376728840"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-SemiBold.otf",
+          "hash": "1937203271135553321"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-SemiBoldItalic.otf",
+          "hash": "1235854325208355598"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-Thin.otf",
+          "hash": "726182523716107673"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/otf/InterDisplay-ThinItalic.otf",
+          "hash": "5256879863198745690"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Black.ttf",
+          "hash": "5607828639355544763"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-BlackItalic.ttf",
+          "hash": "8332692762865914279"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Bold.ttf",
+          "hash": "16157819745856020163"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-BoldItalic.ttf",
+          "hash": "5476439902683755823"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-ExtraBold.ttf",
+          "hash": "8721706152100771295"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-ExtraBoldItalic.ttf",
+          "hash": "8539576168747201075"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-ExtraLight.ttf",
+          "hash": "5200969127776898818"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-ExtraLightItalic.ttf",
+          "hash": "12229683058469997687"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Italic.ttf",
+          "hash": "15252252440065598473"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Light.ttf",
+          "hash": "16180299921527992429"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-LightItalic.ttf",
+          "hash": "14067592729415387600"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Medium.ttf",
+          "hash": "6269553492242885840"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-MediumItalic.ttf",
+          "hash": "275003520434388822"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Regular.ttf",
+          "hash": "17349801955396031182"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-SemiBold.ttf",
+          "hash": "16681285382078400847"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-SemiBoldItalic.ttf",
+          "hash": "9837393013454212924"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-Thin.ttf",
+          "hash": "9139349813533645658"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/Inter-ThinItalic.ttf",
+          "hash": "12835914059582657729"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Black.ttf",
+          "hash": "16822504305220208466"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-BlackItalic.ttf",
+          "hash": "16956076829099401061"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Bold.ttf",
+          "hash": "15562418319607083812"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-BoldItalic.ttf",
+          "hash": "14398288365678621446"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-ExtraBold.ttf",
+          "hash": "3027246212307914799"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-ExtraBoldItalic.ttf",
+          "hash": "8515774705843609477"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-ExtraLight.ttf",
+          "hash": "18050800987639781503"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-ExtraLightItalic.ttf",
+          "hash": "17790513321028874228"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Italic.ttf",
+          "hash": "3706220820248609668"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Light.ttf",
+          "hash": "2845297125130784010"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-LightItalic.ttf",
+          "hash": "8742768838133595578"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Medium.ttf",
+          "hash": "5470605001191994519"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-MediumItalic.ttf",
+          "hash": "10892979714061491433"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Regular.ttf",
+          "hash": "8706138977029275511"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-SemiBold.ttf",
+          "hash": "15021280104771294400"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-SemiBoldItalic.ttf",
+          "hash": "14276810505906999481"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-Thin.ttf",
+          "hash": "572826879865169911"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/extras/ttf/InterDisplay-ThinItalic.ttf",
+          "hash": "5152001356338022876"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/help.txt",
+          "hash": "14886588864221334429"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Black.woff2",
+          "hash": "11937952836971143822"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-BlackItalic.woff2",
+          "hash": "1493127890248109527"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Bold.woff2",
+          "hash": "17713292774846215858"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-BoldItalic.woff2",
+          "hash": "623092326375378804"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-ExtraBold.woff2",
+          "hash": "13350127271424547661"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-ExtraBoldItalic.woff2",
+          "hash": "5132494226338059780"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-ExtraLight.woff2",
+          "hash": "1911643457538003395"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-ExtraLightItalic.woff2",
+          "hash": "7376504950079003494"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Italic.woff2",
+          "hash": "18298239467480916863"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Light.woff2",
+          "hash": "13938428275129276428"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-LightItalic.woff2",
+          "hash": "9871428815886675582"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Medium.woff2",
+          "hash": "11062895445081207924"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-MediumItalic.woff2",
+          "hash": "6617211757258325454"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Regular.woff2",
+          "hash": "16448910949437882740"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-SemiBold.woff2",
+          "hash": "1152230929913881663"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-SemiBoldItalic.woff2",
+          "hash": "14631358580949483704"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-Thin.woff2",
+          "hash": "6495107939414287224"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/Inter-ThinItalic.woff2",
+          "hash": "14663807749029210927"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Black.woff2",
+          "hash": "16554722172362479052"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-BlackItalic.woff2",
+          "hash": "344888430947260530"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Bold.woff2",
+          "hash": "13882914833153795991"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-BoldItalic.woff2",
+          "hash": "10218571855474088911"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-ExtraBold.woff2",
+          "hash": "6349723785520240876"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-ExtraBoldItalic.woff2",
+          "hash": "12738383799612198894"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-ExtraLight.woff2",
+          "hash": "7286591343131274660"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-ExtraLightItalic.woff2",
+          "hash": "11837632329941109902"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Italic.woff2",
+          "hash": "11328397217511402142"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Light.woff2",
+          "hash": "12938923642684626369"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-LightItalic.woff2",
+          "hash": "14219656320464575456"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Medium.woff2",
+          "hash": "3964945058765210961"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-MediumItalic.woff2",
+          "hash": "2104287557884630375"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Regular.woff2",
+          "hash": "8386787718912711348"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-SemiBold.woff2",
+          "hash": "17855004808153655561"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-SemiBoldItalic.woff2",
+          "hash": "6670789015889428999"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-Thin.woff2",
+          "hash": "9794989684243633868"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterDisplay-ThinItalic.woff2",
+          "hash": "10867159997688586182"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterVariable-Italic.woff2",
+          "hash": "16964764538251896861"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/InterVariable.woff2",
+          "hash": "3209719928503176086"
+        },
+        {
+          "file": "public/fonts/Inter-4.0/web/inter.css",
+          "hash": "11238519201488312195"
+        },
+        {
+          "file": "public/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf",
+          "hash": "6030785835425330302"
+        },
+        {
+          "file": "public/fonts/Inter/Inter-VariableFont_opsz,wght.ttf",
+          "hash": "7092351986979172380"
+        },
+        {
+          "file": "public/fonts/Inter/OFL.txt",
+          "hash": "8551276237141761535"
+        },
+        {
+          "file": "public/fonts/Inter/README.txt",
+          "hash": "13910994599550483713"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Black.ttf",
+          "hash": "2390266828721962277"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-BlackItalic.ttf",
+          "hash": "13234805182714998353"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Bold.ttf",
+          "hash": "15431912845654684398"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-BoldItalic.ttf",
+          "hash": "9235357606987408729"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-ExtraBold.ttf",
+          "hash": "7622877864690360331"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-ExtraBoldItalic.ttf",
+          "hash": "15953406384866725602"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-ExtraLight.ttf",
+          "hash": "15517361417444651972"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-ExtraLightItalic.ttf",
+          "hash": "6519154319588002912"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Italic.ttf",
+          "hash": "2788492899252262893"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Light.ttf",
+          "hash": "17535397100895587547"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-LightItalic.ttf",
+          "hash": "17874829471434480711"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Medium.ttf",
+          "hash": "15658514694113229933"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-MediumItalic.ttf",
+          "hash": "11258849138825082059"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Regular.ttf",
+          "hash": "10847648745911464553"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-SemiBold.ttf",
+          "hash": "42551834228948669"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-SemiBoldItalic.ttf",
+          "hash": "682570165659062287"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-Thin.ttf",
+          "hash": "8365159951863454544"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_18pt-ThinItalic.ttf",
+          "hash": "15185611738224418633"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Black.ttf",
+          "hash": "1109877264299287546"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-BlackItalic.ttf",
+          "hash": "17549413085914554344"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Bold.ttf",
+          "hash": "1963817612965968624"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-BoldItalic.ttf",
+          "hash": "13735825104004619083"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-ExtraBold.ttf",
+          "hash": "10517170813994048820"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-ExtraBoldItalic.ttf",
+          "hash": "17027684319941720427"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-ExtraLight.ttf",
+          "hash": "1407730027097510265"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-ExtraLightItalic.ttf",
+          "hash": "6895371716988918405"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Italic.ttf",
+          "hash": "13536965565532163500"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Light.ttf",
+          "hash": "16952815519938783557"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-LightItalic.ttf",
+          "hash": "2241238034883939206"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Medium.ttf",
+          "hash": "11508008480040598422"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-MediumItalic.ttf",
+          "hash": "2024716445315133675"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Regular.ttf",
+          "hash": "11023754889551202127"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-SemiBold.ttf",
+          "hash": "7090888527009002064"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-SemiBoldItalic.ttf",
+          "hash": "1095266060200299127"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-Thin.ttf",
+          "hash": "11505102118963534070"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_24pt-ThinItalic.ttf",
+          "hash": "10131754558557012308"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Black.ttf",
+          "hash": "5640160644886349211"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-BlackItalic.ttf",
+          "hash": "4094745296219301750"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Bold.ttf",
+          "hash": "13906404763558392200"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-BoldItalic.ttf",
+          "hash": "16196042276814214170"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-ExtraBold.ttf",
+          "hash": "4080673416025069703"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-ExtraBoldItalic.ttf",
+          "hash": "17896077659907407715"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-ExtraLight.ttf",
+          "hash": "15936440558996954875"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-ExtraLightItalic.ttf",
+          "hash": "6281883428325720578"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Italic.ttf",
+          "hash": "13295940431507089458"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Light.ttf",
+          "hash": "14742054847152607841"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-LightItalic.ttf",
+          "hash": "8632608974099414379"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Medium.ttf",
+          "hash": "4690877162437796191"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-MediumItalic.ttf",
+          "hash": "8693125704411867069"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Regular.ttf",
+          "hash": "12464175069835869160"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-SemiBold.ttf",
+          "hash": "14183261011103217105"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-SemiBoldItalic.ttf",
+          "hash": "661965066950094812"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-Thin.ttf",
+          "hash": "213657311175464171"
+        },
+        {
+          "file": "public/fonts/Inter/static/Inter_28pt-ThinItalic.ttf",
+          "hash": "15748554519593223196"
+        },
+        {
+          "file": "public/images/catalin.png",
+          "hash": "10067178003940378771"
+        },
+        {
+          "file": "public/images/cimdata-logo.jpg",
+          "hash": "401672179199349752"
+        },
+        {
+          "file": "public/images/icons/common/arrow-left.svg",
+          "hash": "8455703905595700838"
+        },
+        {
+          "file": "public/images/icons/common/bell.svg",
+          "hash": "10260373033639372964"
+        },
+        {
+          "file": "public/images/icons/common/chevron-down.svg",
+          "hash": "14408657337313128631"
+        },
+        {
+          "file": "public/images/icons/common/circle-green.svg",
+          "hash": "9108805514290673093"
+        },
+        {
+          "file": "public/images/icons/common/filter.svg",
+          "hash": "16389988269142333345"
+        },
+        {
+          "file": "public/images/icons/common/folder-plus.svg",
+          "hash": "12934692478684280265"
+        },
+        {
+          "file": "public/images/icons/common/search.svg",
+          "hash": "497514276591946630"
+        },
+        {
+          "file": "public/images/icons/menu/components.svg",
+          "hash": "15569622230498450883"
+        },
+        {
+          "file": "public/images/icons/menu/dashboard.svg",
+          "hash": "6975298460071101430"
+        },
+        {
+          "file": "public/images/icons/menu/media.svg",
+          "hash": "16021892094922700651"
+        },
+        {
+          "file": "public/images/icons/menu/page.svg",
+          "hash": "11399099544062828614"
+        },
+        {
+          "file": "src/app/admin/admin.component.html",
+          "hash": "4531024598574738681"
+        },
+        {
+          "file": "src/app/admin/admin.component.scss",
+          "hash": "1680778826040030935"
+        },
+        {
+          "file": "src/app/admin/admin.component.ts",
+          "hash": "17917488477065256895"
+        },
+        {
+          "file": "src/app/admin/admin.panel.scss",
+          "hash": "7139368605064053311"
+        },
+        {
+          "file": "src/app/admin/admin.routes.ts",
+          "hash": "153659898754493078"
+        },
+        {
+          "file": "src/app/admin/dashboard/dashboard.component.html",
+          "hash": "12852324609478220958"
+        },
+        {
+          "file": "src/app/admin/dashboard/dashboard.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/admin/dashboard/dashboard.component.ts",
+          "hash": "11861874718814366782"
+        },
+        {
+          "file": "src/app/admin/media/folder-tree/folder-tree.component.html",
+          "hash": "10786914877866476965"
+        },
+        {
+          "file": "src/app/admin/media/folder-tree/folder-tree.component.scss",
+          "hash": "17696796250421589971"
+        },
+        {
+          "file": "src/app/admin/media/folder-tree/folder-tree.component.ts",
+          "hash": "11141805590799428043"
+        },
+        {
+          "file": "src/app/admin/media/media.component.html",
+          "hash": "4244997551591253224"
+        },
+        {
+          "file": "src/app/admin/media/media.component.scss",
+          "hash": "1341955516288754174"
+        },
+        {
+          "file": "src/app/admin/media/media.component.ts",
+          "hash": "17829718593848087484"
+        },
+        {
+          "file": "src/app/admin/shared/layout/breadcrumb/breadcrumb.component.html",
+          "hash": "3992795741818515380"
+        },
+        {
+          "file": "src/app/admin/shared/layout/breadcrumb/breadcrumb.component.scss",
+          "hash": "11615931195916975759"
+        },
+        {
+          "file": "src/app/admin/shared/layout/breadcrumb/breadcrumb.component.ts",
+          "hash": "13567207745054456181"
+        },
+        {
+          "file": "src/app/admin/shared/layout/header/header.component.html",
+          "hash": "17035291818814706609"
+        },
+        {
+          "file": "src/app/admin/shared/layout/header/header.component.scss",
+          "hash": "339868891152575932"
+        },
+        {
+          "file": "src/app/admin/shared/layout/header/header.component.ts",
+          "hash": "687022839038580200"
+        },
+        {
+          "file": "src/app/admin/shared/layout/logo/logo.component.html",
+          "hash": "4651041606876463270"
+        },
+        {
+          "file": "src/app/admin/shared/layout/logo/logo.component.scss",
+          "hash": "12697992632445741213"
+        },
+        {
+          "file": "src/app/admin/shared/layout/logo/logo.component.ts",
+          "hash": "7403969636649991904"
+        },
+        {
+          "file": "src/app/admin/shared/layout/menu/menu.component.html",
+          "hash": "13226873133772713038"
+        },
+        {
+          "file": "src/app/admin/shared/layout/menu/menu.component.scss",
+          "hash": "6219434073611529569"
+        },
+        {
+          "file": "src/app/admin/shared/layout/menu/menu.component.ts",
+          "hash": "9993865954373975294"
+        },
+        {
+          "file": "src/app/admin/shared/layout/sidebar/sidebar.component.html",
+          "hash": "16313992617706879544"
+        },
+        {
+          "file": "src/app/admin/shared/layout/sidebar/sidebar.component.scss",
+          "hash": "10860521195233953914"
+        },
+        {
+          "file": "src/app/admin/shared/layout/sidebar/sidebar.component.ts",
+          "hash": "8087998699162179309"
+        },
+        {
+          "file": "src/app/admin/shared/layout/topbar/topbar.component.html",
+          "hash": "8452891479763002595"
+        },
+        {
+          "file": "src/app/admin/shared/layout/topbar/topbar.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/admin/shared/layout/topbar/topbar.component.ts",
+          "hash": "3258841984010547364"
+        },
+        {
+          "file": "src/app/admin/shared/layout/version/version.component.html",
+          "hash": "4227426512355453620"
+        },
+        {
+          "file": "src/app/admin/shared/layout/version/version.component.scss",
+          "hash": "3843353899007084616"
+        },
+        {
+          "file": "src/app/admin/shared/layout/version/version.component.ts",
+          "hash": "9218964439630360064"
+        },
+        {
+          "file": "src/app/admin/shared/search/search.component.html",
+          "hash": "14133596227136564423"
+        },
+        {
+          "file": "src/app/admin/shared/search/search.component.scss",
+          "hash": "13317361783363199834"
+        },
+        {
+          "file": "src/app/admin/shared/search/search.component.ts",
+          "hash": "9095760247212791477"
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "5001760920598002405"
+        },
+        {
+          "file": "src/app/app.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "17121861803906477095"
+        },
+        {
+          "file": "src/app/app.config.ts",
+          "hash": "9422075656410431393"
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "286652782251219162"
+        },
+        {
+          "file": "src/app/core/constants/AppSettings.ts",
+          "hash": "1193505708034222885"
+        },
+        {
+          "file": "src/app/core/directives/breadcrumb.directive.ts",
+          "hash": "3619263741013914140"
+        },
+        {
+          "file": "src/app/core/interceptors/api.interceptor.ts",
+          "hash": "4091375537527730834"
+        },
+        {
+          "file": "src/app/core/interceptors/token.interceptor.ts",
+          "hash": "12651711082283164831"
+        },
+        {
+          "file": "src/app/core/interfaces/IApiResult.ts",
+          "hash": "7265011390573955583"
+        },
+        {
+          "file": "src/app/core/interfaces/IErrorDescriber.ts",
+          "hash": "14028971095399175769"
+        },
+        {
+          "file": "src/app/core/interfaces/breadcrumb.ts",
+          "hash": "4403288231044909380"
+        },
+        {
+          "file": "src/app/core/interfaces/media/IDirectory.ts",
+          "hash": "8427225600347890233"
+        },
+        {
+          "file": "src/app/core/interfaces/media/IFile.ts",
+          "hash": "16616086186272009754"
+        },
+        {
+          "file": "src/app/core/services/api/api.service.ts",
+          "hash": "14793184920881936639"
+        },
+        {
+          "file": "src/app/core/services/api/media.service.ts",
+          "hash": "17499778958356912762"
+        },
+        {
+          "file": "src/app/core/services/breadcrumb.service.ts",
+          "hash": "4280668365108250441"
+        },
+        {
+          "file": "src/app/core/services/search.service.ts",
+          "hash": "3568292186556156791"
+        },
+        {
+          "file": "src/app/core/services/tree.service.ts",
+          "hash": "2640699022689494369"
+        },
+        {
+          "file": "src/app/main/home/home.component.html",
+          "hash": "8395823309681990179"
+        },
+        {
+          "file": "src/app/main/home/home.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/main/home/home.component.ts",
+          "hash": "13850897759559828564"
+        },
+        {
+          "file": "src/app/main/main.component.html",
+          "hash": "14702717708078270114"
+        },
+        {
+          "file": "src/app/main/main.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/main/main.component.ts",
+          "hash": "9197436199788150663"
+        },
+        {
+          "file": "src/app/main/main.routes.ts",
+          "hash": "6616595072952151637"
+        },
+        {
+          "file": "src/app/main/not-found/not-found.component.html",
+          "hash": "2055145212757067268"
+        },
+        {
+          "file": "src/app/main/not-found/not-found.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/main/not-found/not-found.component.ts",
+          "hash": "13888873035104711135"
+        },
+        {
+          "file": "src/environments/environment.development.ts",
+          "hash": "768105908825767037"
+        },
+        {
+          "file": "src/environments/environment.ts",
+          "hash": "2310327455381624933"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "9485092589811559991"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "4927504514031276065"
+        },
+        {
+          "file": "src/styles.scss",
+          "hash": "16595703407342691905"
+        },
+        {
+          "file": "src/styles/panel/abstracts/_mixins.scss",
+          "hash": "9339092225550579253"
+        },
+        {
+          "file": "src/styles/panel/abstracts/_variables.scss",
+          "hash": "13138592323639834469"
+        },
+        {
+          "file": "src/styles/panel/base/_typography.scss",
+          "hash": "12836182560278750797"
+        },
+        {
+          "file": "src/styles/panel/themes/_fonts.scss",
+          "hash": "12441925810753819601"
+        },
+        {
+          "file": "src/styles/panel/utils/_functions.scss",
+          "hash": "15169484917439874661"
+        },
+        {
+          "file": "tailwind.config.js",
+          "hash": "4848115117840160948"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "17212958746959192557"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "13365163266564685398"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "8918301549046766373"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}
