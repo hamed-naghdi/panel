@@ -10,10 +10,9 @@ import {FloatLabelModule} from 'primeng/floatlabel';
 import {FormsModule} from '@angular/forms';
 import {Tree} from 'primeng/tree';
 
-import { environment } from '../../../../environments/environment';
 import {MediaService} from '../../../core/services/api/media.service';
-import {TreeService} from '../../../core/services/tree.service';
 import {LoggerService} from '../../../core/services/logger.service';
+import { arraysEqual } from '../../../core/utilities/arrayHelper';
 
 @Component({
   selector: 'hami-folder-tree',
@@ -35,7 +34,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   createFolderGroup!: FormGroup;
   newFolderName = new FormControl('', [
     Validators.required,
-    Validators.minLength(3),
+    Validators.minLength(1),
   ])
 
 
@@ -47,7 +46,6 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
               private mediaService: MediaService,
-              private treeService: TreeService,
               private loggerService: LoggerService,
               private cd: ChangeDetectorRef) {
 
@@ -105,57 +103,80 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     this.newFolderName.setValue('');
   }
 
+  protected areChildrenEquals(node: TreeNode, children: TreeNode[] | undefined ): boolean {
+    if (node.children === undefined && children === undefined)
+      return true;
+
+    if (node.children === undefined)
+      return false;
+
+    const nodeChildrenKeys = (node.children as TreeNode[])
+      .map((child: TreeNode) => child.key)
+      .filter((item) => item !== undefined);
+
+    const childrenKeys = (children as TreeNode[])
+      .map((child: TreeNode) => child.key)
+      .filter((item) => item !== undefined);
+
+    return arraysEqual(nodeChildrenKeys, childrenKeys);
+  }
+
+  protected loadNode(node: TreeNode): void {
+    if (!node)
+      return;
+
+    if (!node.key)
+      node.key = '/';
+
+    node.loading = true;
+
+    this.getDirectorySubscription = this.mediaService.getDirectory(node.key).subscribe({
+      next: (apiResult) => {
+        if (!apiResult.succeeded) {
+          node.loading = false;
+          const errors = apiResult.errors;
+          if (!errors)
+            return;
+          for (let key in errors){
+            for (let error in errors[key]){
+              this.messageService.add({
+                key: key,
+                severity: 'error',
+                summary: error
+              })
+            }
+          }
+          return;
+        }
+        const children = this.mediaService.convertDataToTreeNode(apiResult.data, node.key!);
+
+        if (!this.areChildrenEquals(node, children)){
+          node.children = [];
+
+          if (children && children.length > 0) {
+            node.children = children;
+          } else {
+            node.leaf = true;
+          }
+        }
+
+        node.loading = false;
+        this.cd.markForCheck();
+      },
+      error: (err) => {
+        node.loading = false;
+        this.messageService.add({ severity: 'error', summary: `Server is unavailable`, detail: `try again later` });
+      },
+      complete: () => {}
+    })
+  }
+
   nodeExpand(event: any) {
     // this.messageService.add({ severity: 'success', summary: 'Node Expanded', detail: `${event.node.label} | ${event.node.data}` });
 
-    this.loggerService.log('nodeExpand', event.node.key);
-    this.loggerService.log(event.node.children)
-
-
-    if (!event.node.children) {
-      let _key = event.node.key;
-      if (!_key)
-        _key = '/';
-
-      this.loggerService.log(this.tree)
-
-      //this.tree.find((item) => item.key === _key);
-      const node = event.node;
-
-      if (!node)
-        return;
-
-      // event.node.loading = true;
-      node.loading = true;
-
-      this.getDirectorySubscription = this.mediaService.getDirectory(_key).subscribe({
-        next: (apiResult) => {
-          if (!apiResult.succeeded) {
-            event.node.loading = false;
-            const errors = apiResult.errors;
-            if (!errors)
-              return;
-            for (let key in errors){
-              for (let error in errors[key]){
-                this.messageService.add({
-                  key: key,
-                  severity: 'error',
-                  summary: error
-                })
-              }
-            }
-            return;
-          }
-          const children = this.mediaService.convertDirectoryDataToTreeNode(apiResult.data, _key);
-          this.treeService.updateNode(node, children);
-          this.cd.markForCheck();
-        },
-        error: (err) => {
-          node.loading = false;
-          this.messageService.add({ severity: 'error', summary: `Server is unavailable`, detail: `try again later` });
-        },
-        complete: () => {}
-      })
+    const node = event.node as TreeNode;
+    if (!node.children) {
+      this.loadNode(node);
     }
   }
 
@@ -164,8 +185,9 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   }
 
   nodeSelect(event: any) {
-    // console.log(this.selectedFolder);
-    // this.messageService.add({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
+    const node = event.node as TreeNode;
+    // this.loggerService.warn(node.key)
+    this.loadNode(node);
   }
 
   nodeUnselect(event: any) {

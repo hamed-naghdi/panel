@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpContext, HttpParams} from '@angular/common/http';
 import {delay, map, retry} from 'rxjs/operators';
-import {catchError, Observable, of, tap} from 'rxjs';
+import {Observable, catchError, of, tap} from 'rxjs';
+import {TreeNode} from 'primeng/api';
 
 import {IDirectory} from '../../interfaces/media/directory';
-import {IApiResult} from '../../interfaces/IApiResult';
-import {LoadingService} from '../loading.service';
+import {IApiResult} from '../../interfaces/apiResult';
 import {SkipLoading} from '../../interceptors/loading.interceptor';
 import {LoggerService} from '../logger.service';
-import {ITree} from '../../interfaces/media/tree';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +26,13 @@ export class MediaService {
 
     return this.httpClient
       .get<IApiResult<IDirectory>>(`media/directory/get`, options).pipe(
-        delay(2000),
+        // delay(500),
         retry(3),
         catchError(this.handleError())
       );
   }
 
-  convertDirectoryDataToTreeNode(data: IDirectory | undefined, key: string): ITree[] | undefined {
+  convertDataToTreeNode(data: IDirectory | undefined, key: string): TreeNode[] | undefined {
     return data?.directories?.map((item) => {
       return {
         key: `${key}${item}/`,

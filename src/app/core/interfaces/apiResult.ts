@@ -1,4 +1,4 @@
-import IErrorDescriber from './IErrorDescriber';
+import IErrorDescriber from './errorDescriber';
 
 export interface IApiResult<T> {
   succeeded: boolean;
