@@ -29,7 +29,7 @@ export class MediaService {
 
     return this.httpClient
       .get<IApiResult<IDirectory>>(`media/directory/get`, options).pipe(
-        // delay(2000),
+        delay(2000),
         catchError((error) => this.errorService.catchHttpError(error))
       );
   }

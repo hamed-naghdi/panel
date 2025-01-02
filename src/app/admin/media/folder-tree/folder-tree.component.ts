@@ -142,6 +142,9 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
         this.loadNode(node, apiResult);
       },
       error: (error) => {
+        if (this.expandedNode)
+          this.expandedNode.loading = false;
+
         this.messageService.add({ severity: 'error', summary: `Unknown Error`, detail: `try again later` });
       },
       complete: () => {}
@@ -289,6 +292,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
   nodeExpand(event: any) {
     const node = event.node as TreeNode;
+    node.loading = true;
     this.expandedNode = node;
 
     if (!node.children) {
