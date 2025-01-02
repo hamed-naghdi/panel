@@ -1,6 +1,10 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {catchError, exhaustMap, of, Subject, Subscription} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+
+import {InputGroup} from 'primeng/inputgroup';
+import {InputGroupAddon} from 'primeng/inputgroupaddon';
 import {MessageService, TreeNode} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
@@ -8,15 +12,13 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FloatLabelModule} from 'primeng/floatlabel';
 import {Tree} from 'primeng/tree';
 
+import {treeDesignToken} from '../../shared/common/treeDesignToken';
+import {arraysEqual} from '../../../core/utilities/arrayHelper';
+
 import {MediaService} from '../../../core/services/api/media.service';
 import {LoggerService} from '../../../core/services/logger.service';
 import {ErrorService} from '../../../core/services/error.service';
-import {arraysEqual} from '../../../core/utilities/arrayHelper';
-import {treeDesignToken} from '../../shared/common/treeDesignToken';
-import {InputGroup} from 'primeng/inputgroup';
-import {InputGroupAddon} from 'primeng/inputgroupaddon';
 import {FormService} from '../../../core/services/form.service';
-import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'hami-folder-tree',
