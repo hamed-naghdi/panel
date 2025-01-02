@@ -8,6 +8,8 @@ import {IDirectory} from '../../interfaces/media/directory';
 import {IApiResult} from '../../interfaces/apiResult';
 import {SkipLoading} from '../../interceptors/loading.interceptor';
 import {LoggerService} from '../logger.service';
+import {ICreateDirectoryResponse} from '../../interfaces/media/createDirectory';
+import {ErrorService} from '../error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ import {LoggerService} from '../logger.service';
 export class MediaService {
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly loggerService: LoggerService,) {
+              private readonly loggerService: LoggerService,
+              private readonly errorService: ErrorService,) {
   }
 
   getDirectory(directoryPath: string): Observable<IApiResult<IDirectory>> {
@@ -26,9 +29,8 @@ export class MediaService {
 
     return this.httpClient
       .get<IApiResult<IDirectory>>(`media/directory/get`, options).pipe(
-        // delay(500),
-        retry(3),
-        catchError(this.handleError())
+        // delay(2000),
+        catchError((error) => this.errorService.catchHttpError(error))
       );
   }
 
@@ -45,27 +47,21 @@ export class MediaService {
     })
   }
 
-  createDirectory(path: string): Observable<void> {
+  createDirectory(path: string): Observable<IApiResult<ICreateDirectoryResponse>> {
     const options = {}
     return this.httpClient
-      .post<IApiResult<{path: string}>>(`media/create`, { path: path }, options).pipe(
-        map(result => {
-          console.log(result)
-        }),
-        catchError((error) => {
-          console.log(error);
-
-          return of();
-        })
+      .post<IApiResult<ICreateDirectoryResponse>>(`media/directory/create`, { path: path }, options).pipe(
+        // delay(500),
+        catchError((error) => this.errorService.catchHttpError(error))
       )
   }
 
-  private handleError() {
-    return (error: any) => {
-      this.loggerService.error(error);
-      // this.messageService.add({ severity: 'error', summary: `Error Happened`, detail: `No details found.` });
-      // return of(error);
-      throw error;
-    };
-  }
+  // private handleError() {
+  //   return (error: any) => {
+  //     this.loggerService.error(error);
+  //     // this.messageService.add({ severity: 'error', summary: `Error Happened`, detail: `No details found.` });
+  //     // return of(error);
+  //     throw error;
+  //   };
+  // }
 }

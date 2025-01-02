@@ -5,7 +5,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
 import { MessageService } from 'primeng/api';
 import { routes } from './app.routes';
-import {primeNgConfig} from './primeNgConfig';
+import {primeNgDefaultPreset} from './primeNgConfig';
 
 import {apiInterceptor} from './core/interceptors/api.interceptor';
 import {loadingInterceptor} from './core/interceptors/loading.interceptor';
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     providePrimeNG({
       theme: {
-        preset: primeNgConfig,
+        preset: primeNgDefaultPreset,
         options: {
           darkModeSelector: false
         }

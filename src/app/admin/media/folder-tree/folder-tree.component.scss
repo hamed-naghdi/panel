@@ -1,17 +1,5 @@
 @use "../../../../styles/panel/abstracts/variables" as var;
 
-:host ::ng-deep .hami-folder-tree {
-  &.p-tree {
-    padding: 0 !important;
-
-    .p-tree-node-content {
-      padding-left: 0 !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-}
-
 .wrapper {
   display: flex;
   padding: var.$primary-padding;

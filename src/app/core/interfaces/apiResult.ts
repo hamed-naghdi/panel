@@ -5,7 +5,9 @@ export interface IApiResult<T> {
   message?: string;
   httpStatusCode: number;
   data?: T;
-  errors?: {
-    [key: string]: IErrorDescriber[]
-  };
+  errors?: IServerError;
+}
+
+export interface IServerError {
+  [key: string]: IErrorDescriber[]
 }

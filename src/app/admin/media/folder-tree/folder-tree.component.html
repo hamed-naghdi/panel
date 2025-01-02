@@ -3,16 +3,27 @@
           [modal]="true"
           [(visible)]="visibleCreateFolderDialog">
   <span class="p-text-secondary block mb-8">Create new folder.</span>
-  <form [formGroup]="createFolderGroup" (ngSubmit)="createFolder()">
-    <div class="flex items-center gap-4 mb-4">
-      <p-floatlabel>
-        <input id="newFolderName" autocomplete="off" pInputText [formControl]="newFolderName" />
-        <label for="newFolderName">folder name</label>
-      </p-floatlabel>
+  <form [formGroup]="createFolderGroup" (ngSubmit)="createFolder()" #createFolderForm="ngForm">
+    <div class="gap-4 mb-4">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-folder-plus"></i>
+        </p-inputgroup-addon>
+        <p-floatlabel variant="on">
+          <input pInputText id="newFolderName" autocomplete="off" formControlName="newFolderName" />
+          <label for="newFolderName">folder name</label>
+        </p-floatlabel>
+      </p-inputgroup>
+      @let newFolderName = createFolderForm.form.get('newFolderName');
+      @if (newFolderName?.invalid && (newFolderName?.dirty || newFolderName?.touched) ) {
+        @for (error of pathErrors; track  error) {
+          <div class="text-red-500 mt-2">{{error}}</div>
+        }
+      }
     </div>
     <div class="flex justify-end gap-2">
-      <p-button label="Cancel" severity="secondary" (click)="visibleCreateFolderDialog = false" />
-      <p-button label="Save" type="submit" [disabled]="!createFolderGroup.valid" />
+      <p-button label="Cancel" severity="secondary" (click)="closeDialog()" />
+      <p-button label="Create" type="submit"  [disabled]="!createFolderGroup.valid" />
     </div>
   </form>
 </p-dialog>
@@ -26,8 +37,8 @@
     </p-button>
   </div>
   <div class="body">
-    <p-tree [value]="tree"
-            styleClass="w-full hami-folder-tree"
+    <p-tree [value]="tree" [dt]="treeDesignToken"
+            styleClass="w-full"
             selectionMode="single"
             loadingMode="icon"
             [(selection)]="selectedFolder"
