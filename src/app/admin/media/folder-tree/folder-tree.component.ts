@@ -10,7 +10,7 @@ import {
   Subscription,
   switchMap, tap
 } from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import {filter, finalize, map} from 'rxjs/operators';
 
 import {InputGroup} from 'primeng/inputgroup';
 import {InputGroupAddon} from 'primeng/inputgroupaddon';
@@ -139,11 +139,26 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
       next: (apiResult) => {
         const node = this.expandedNode;
         if (!node) return;
-        this.loadNode(node, apiResult);
+        this.loadChildren(node, apiResult);
       },
       error: (error) => {
         if (this.expandedNode)
           this.expandedNode.loading = false;
+
+        this.messageService.add({ severity: 'error', summary: `Unknown Error`, detail: `try again later` });
+      },
+      complete: () => {}
+    })
+
+    this.nodeSelectedSubscription = this.getDir$(this.nodeSelected$).subscribe({
+      next: (apiResult) => {
+        const node = this.selectedNode;
+        if (!node) return;
+        this.loadChildren(node, apiResult);
+      },
+      error: (error) => {
+        if (this.selectedNode)
+          this.selectedNode.loading = false;
 
         this.messageService.add({ severity: 'error', summary: `Unknown Error`, detail: `try again later` });
       },
@@ -200,7 +215,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     return arraysEqual(nodeChildrenKeys, childrenKeys);
   }
 
-  protected loadNode(node: TreeNode, apiResult: IApiResult<IDirectory>): void {
+  protected loadChildren(node: TreeNode, apiResult: IApiResult<IDirectory>): void {
     const children = this.mediaService.convertDataToTreeNode(apiResult.data, node.key!);
 
     if (!this.areChildrenEquals(node, children)){
@@ -210,9 +225,6 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
       else
         node.leaf = true;
     }
-
-    node.loading = false;
-    this.cd.markForCheck();
   }
 
   private addNode(node: TreeNode): void {
@@ -231,6 +243,10 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
           catchError((error) => {
             this.messageService.add({ severity: 'error', summary: `Server is unavailable`, detail: `try again later` });
             return of()
+          }),
+          finalize(() => {
+            node.loading = false;
+            this.cd.markForCheck();
           })
         )
       }),
@@ -243,6 +259,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   //#region create folder
 
   private resetCreateFolderForm(form: FormGroup): void {
+    this.pathErrors = []
     form.patchValue({
       newFolderName: ''
     })
@@ -292,10 +309,9 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
   nodeExpand(event: any) {
     const node = event.node as TreeNode;
-    node.loading = true;
-    this.expandedNode = node;
-
     if (!node.children) {
+      node.loading = true;
+      this.expandedNode = node;
       this.nodeExpanded$.next(node);
     }
   }
@@ -307,10 +323,8 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   nodeSelect(event: any) {
     const node = event.node as TreeNode;
     this.nodeSelected$.next(node);
-    // this.loadNode(node);
   }
 
   nodeUnselect(event: any) {
-    // this.messageService.add({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
   }
 }
