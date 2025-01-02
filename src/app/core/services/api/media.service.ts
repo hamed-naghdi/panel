@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpContext, HttpParams} from '@angular/common/http';
-import {delay, map, retry} from 'rxjs/operators';
-import {Observable, catchError, of, tap} from 'rxjs';
+import {Observable, catchError, tap} from 'rxjs';
+import {delay} from 'rxjs/operators';
 import {TreeNode} from 'primeng/api';
 
 import {IDirectory} from '../../interfaces/media/directory';
@@ -48,11 +48,12 @@ export class MediaService {
   }
 
   createDirectory(path: string): Observable<IApiResult<ICreateDirectoryResponse>> {
-    const options = {}
+    const options = {
+      // context: new HttpContext().set(SkipLoading, true),
+    }
     return this.httpClient
       .post<IApiResult<ICreateDirectoryResponse>>(`media/directory/create`, { path: path }, options).pipe(
-        // delay(500),
-        catchError((error) => this.errorService.catchHttpError(error))
+        catchError((error) => this.errorService.catchHttpError(error)),
       )
   }
 

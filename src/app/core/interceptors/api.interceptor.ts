@@ -7,7 +7,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   const modifiedReq = req.clone({
     url: `${apiUrl}/${req.url}`,
     setHeaders: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=UTF-8',
     }
   });
 

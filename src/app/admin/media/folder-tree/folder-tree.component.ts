@@ -1,21 +1,22 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule, FormBuilder} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import { MessageService, TreeNode } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {catchError, exhaustMap, of, Subject, Subscription} from 'rxjs';
+import {MessageService, TreeNode} from 'primeng/api';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
 import {FloatLabelModule} from 'primeng/floatlabel';
 import {Tree} from 'primeng/tree';
 
 import {MediaService} from '../../../core/services/api/media.service';
 import {LoggerService} from '../../../core/services/logger.service';
 import {ErrorService} from '../../../core/services/error.service';
-import { arraysEqual } from '../../../core/utilities/arrayHelper';
-import { treeDesignToken } from '../../shared/common/treeDesignToken';
+import {arraysEqual} from '../../../core/utilities/arrayHelper';
+import {treeDesignToken} from '../../shared/common/treeDesignToken';
 import {InputGroup} from 'primeng/inputgroup';
 import {InputGroupAddon} from 'primeng/inputgroupaddon';
 import {FormService} from '../../../core/services/form.service';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'hami-folder-tree',
@@ -37,6 +38,8 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   protected readonly treeDesignToken = treeDesignToken;
 
   visibleCreateFolderDialog: boolean = false;
+  pathErrors: string[] = [];
+  submitCreateFolder$: Subject<FormGroup> = new Subject();
   createFolderGroup: FormGroup = new FormGroup({
     newFolderName: new FormControl('', [
       Validators.required,
@@ -44,13 +47,11 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
       Validators.pattern(/^[a-zA-Z0-9-_ ]{1,255}$/)
     ])
   });
-  pathErrors: string[] = [];
 
   getDirectorySubscription: Subscription | undefined;
   createDirectorySubscription: Subscription | undefined;
 
   tree: TreeNode[] = [];
-
   selectedFolder?: TreeNode;
 
   constructor(private messageService: MessageService,
@@ -68,6 +69,50 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     this.tree = this.initiateTree();
     this.tree.map((node) => (node.loading = false));
     this.cd.markForCheck();
+
+    this.createDirectorySubscription = this.submitCreateFolder$.pipe(
+      filter(form => form.valid),
+      map(form => {
+        const newFolderName = form.get('newFolderName')?.value as string;
+        return {
+          ...form.value,
+          path: this.generateFolderPath(newFolderName, this.selectedFolder?.key),
+        };
+      }),
+      exhaustMap((transformedFormData) => {
+        return this.mediaService.createDirectory(transformedFormData.path).pipe(
+          catchError((error) => {
+            this.handleCreateFolderErrors(error)
+            return of()
+          }),
+        );
+      })
+    ).subscribe({
+      next: apiResult => {
+        if (!apiResult.succeeded)
+          return;
+
+        // empty errors
+        this.pathErrors = []
+
+        const newFolderName = this.createFolderGroup.get('newFolderName')?.value as string;
+        // const path = apiResult.data?.path;
+        const path = this.generateFolderPath(newFolderName, this.selectedFolder?.key);
+        const newNode: TreeNode = {
+          key: path,
+          label: newFolderName,
+          data: path,
+          icon: 'pi pi-folder',
+          leaf: true,
+          loading: false,
+        }
+        this.addNode(newNode);
+        this.messageService.add({ severity: 'success', summary: `'${newFolderName}' successfully created` });
+        this.closeDialog();
+      },
+      error: error => this.handleCreateFolderErrors(error),
+      complete: () => {}
+    })
   }
 
   ngOnDestroy(): void {
@@ -199,59 +244,29 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     this.visibleCreateFolderDialog = false;
   }
 
-  protected createFolder(): void {
-    const form = this.createFolderGroup;
-    if (!form.valid)
-      return;
+  private generateFolderPath(newFolderName: string, selectedFolderPath?: string): string {
+    const normalizedPath = selectedFolderPath?.replace(/\/+$/, '') + '/';
+    return `${normalizedPath}${newFolderName}/`
+  }
 
-    const newFolderName = form.get('newFolderName')?.value as string;
-
-    const transformedFormData = {
-      ...form.value,
-      path: `${this.selectedFolder?.key}${newFolderName}/`,
-    };
-
-    this.createDirectorySubscription = this.mediaService.createDirectory(transformedFormData.path)
-      .subscribe({
-        next: (apiResult) => {
-          if (!apiResult.succeeded)
-            return;
-
-          const newNode: TreeNode = {
-            key: transformedFormData.path,
-            label: newFolderName,
-            data: transformedFormData.path,
-            icon: 'pi pi-folder',
-            leaf: true,
-            loading: false,
-          }
-
-          this.addNode(newNode);
-
-          this.messageService.add({ severity: 'success', summary: `'${newFolderName}' successfully created` });
-        },
-        error: (error) => {
-          this.errorService.notifyErrors(error);
-          this.errorService.setServerErrors(form, error, [
-            {
-              serverKey: 'Path',
-              formKey: 'newFolderName'
-            }
-          ]);
-          this.pathErrors = this.formService.getServerFormErrors('newFolderName', form);
-        },
-        complete: () => {
-          this.pathErrors = []
-          this.closeDialog();
-        }
-      })
+  protected onCreateFolderFormSubmit(): void {
+    this.submitCreateFolder$.next(this.createFolderGroup);
   }
 
   //#endregion
 
-  //#region error-manager
+  //#region errors
 
-
+  private handleCreateFolderErrors(error: any): void {
+    this.errorService.notifyErrors(error);
+    this.errorService.setServerErrors(this.createFolderGroup, error, [
+      {
+        serverKey: 'Path',
+        formKey: 'newFolderName'
+      }
+    ]);
+    this.pathErrors = this.formService.getServerFormErrors('newFolderName', this.createFolderGroup);
+  }
 
   //#endregion
 
@@ -275,7 +290,6 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   }
 
   nodeUnselect(event: any) {
-    // console.log(this.selectedFolder);
     // this.messageService.add({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
   }
 }

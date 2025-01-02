@@ -3,7 +3,7 @@
           [modal]="true"
           [(visible)]="visibleCreateFolderDialog">
   <span class="p-text-secondary block mb-8">Create new folder.</span>
-  <form [formGroup]="createFolderGroup" (ngSubmit)="createFolder()" #createFolderForm="ngForm">
+  <form [formGroup]="createFolderGroup" (ngSubmit)="onCreateFolderFormSubmit()" #createFolderForm="ngForm">
     <div class="gap-4 mb-4">
       <p-inputgroup>
         <p-inputgroup-addon>

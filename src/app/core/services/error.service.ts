@@ -31,7 +31,6 @@ export class ErrorService {
   }
 
   public setServerErrors(form: FormGroup, error: HttpErrorResponse, translates?: [{serverKey: string, formKey: string}]) {
-    // console.warn(error);
     if (error.error instanceof ErrorEvent || !isApiResult(error.error))
       return;
 
