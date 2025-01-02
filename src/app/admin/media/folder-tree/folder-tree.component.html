@@ -31,7 +31,7 @@
 <div class="wrapper">
   <div class="header">
     <label class="title">Ordner</label>
-    <p-button (click)="openDialog()" [disabled]="!selectedFolder">
+    <p-button (click)="openDialog()" [disabled]="!selectedNode">
       <i class="pi pi-folder-plus"></i>
       Erstellen
     </p-button>
@@ -41,7 +41,7 @@
             styleClass="w-full"
             selectionMode="single"
             loadingMode="icon"
-            [(selection)]="selectedFolder"
+            [(selection)]="selectedNode"
             (onNodeExpand)="nodeExpand($event)"
             (onNodeCollapse)="nodeCollapse($event)"
             (onNodeSelect)="nodeSelect($event)"

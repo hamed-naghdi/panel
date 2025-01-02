@@ -1,6 +1,15 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {catchError, exhaustMap, of, Subject, Subscription} from 'rxjs';
+import {
+  catchError,
+  distinctUntilChanged,
+  exhaustMap,
+  Observable,
+  of,
+  Subject,
+  Subscription,
+  switchMap, tap
+} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 
 import {InputGroup} from 'primeng/inputgroup';
@@ -19,6 +28,8 @@ import {MediaService} from '../../../core/services/api/media.service';
 import {LoggerService} from '../../../core/services/logger.service';
 import {ErrorService} from '../../../core/services/error.service';
 import {FormService} from '../../../core/services/form.service';
+import {IApiResult} from '../../../core/interfaces/apiResult';
+import {IDirectory} from '../../../core/interfaces/media/directory';
 
 @Component({
   selector: 'hami-folder-tree',
@@ -42,6 +53,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   visibleCreateFolderDialog: boolean = false;
   pathErrors: string[] = [];
   submitCreateFolder$: Subject<FormGroup> = new Subject();
+  createDirectorySubscription: Subscription | undefined;
   createFolderGroup: FormGroup = new FormGroup({
     newFolderName: new FormControl('', [
       Validators.required,
@@ -50,11 +62,18 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     ])
   });
 
-  getDirectorySubscription: Subscription | undefined;
-  createDirectorySubscription: Subscription | undefined;
-
   tree: TreeNode[] = [];
-  selectedFolder?: TreeNode;
+
+  selectedNode?: TreeNode;
+  nodeSelected$: Subject<TreeNode> = new Subject<TreeNode>();
+  nodeSelectedSubscription: Subscription | undefined;
+
+  expandedNode?: TreeNode;
+  nodeExpanded$: Subject<TreeNode> = new Subject<TreeNode>();
+  nodeExpandedSubscription: Subscription | undefined;
+
+
+
 
   constructor(private messageService: MessageService,
               private mediaService: MediaService,
@@ -78,7 +97,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
         const newFolderName = form.get('newFolderName')?.value as string;
         return {
           ...form.value,
-          path: this.generateFolderPath(newFolderName, this.selectedFolder?.key),
+          path: this.generateFolderPath(newFolderName, this.selectedNode?.key),
         };
       }),
       exhaustMap((transformedFormData) => {
@@ -99,7 +118,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
         const newFolderName = this.createFolderGroup.get('newFolderName')?.value as string;
         // const path = apiResult.data?.path;
-        const path = this.generateFolderPath(newFolderName, this.selectedFolder?.key);
+        const path = this.generateFolderPath(newFolderName, this.selectedNode?.key);
         const newNode: TreeNode = {
           key: path,
           label: newFolderName,
@@ -115,11 +134,27 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
       error: error => this.handleCreateFolderErrors(error),
       complete: () => {}
     })
+
+    this.nodeExpandedSubscription = this.getDir$(this.nodeExpanded$).subscribe({
+      next: (apiResult) => {
+        const node = this.expandedNode;
+        if (!node) return;
+        this.loadNode(node, apiResult);
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: `Unknown Error`, detail: `try again later` });
+      },
+      complete: () => {}
+    })
   }
 
   ngOnDestroy(): void {
-    if (this.getDirectorySubscription) {
-      this.getDirectorySubscription.unsubscribe();
+    if (this.nodeSelectedSubscription) {
+      this.nodeSelectedSubscription.unsubscribe();
+    }
+
+    if (this.nodeExpandedSubscription) {
+      this.nodeExpandedSubscription.unsubscribe();
     }
 
     if (this.createDirectorySubscription) {
@@ -129,7 +164,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
   //#endregion
 
-  //#region tree view
+  //#region tree
 
   private initiateTree(): TreeNode[] {
     return [
@@ -162,62 +197,42 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     return arraysEqual(nodeChildrenKeys, childrenKeys);
   }
 
-  protected loadNode(node: TreeNode): void {
-    if (!node)
-      return;
+  protected loadNode(node: TreeNode, apiResult: IApiResult<IDirectory>): void {
+    const children = this.mediaService.convertDataToTreeNode(apiResult.data, node.key!);
 
-    if (!node.key)
-      node.key = '/';
+    if (!this.areChildrenEquals(node, children)){
+      node.children = [];
+      if (children && children.length > 0)
+        node.children = children;
+      else
+        node.leaf = true;
+    }
 
-    node.loading = true;
-
-    this.getDirectorySubscription = this.mediaService.getDirectory(node.key).subscribe({
-      next: (apiResult) => {
-        if (!apiResult.succeeded) {
-          // node.loading = false;
-          const errors = apiResult.errors;
-          if (!errors)
-            return;
-          for (let key in errors){
-            for (let error in errors[key]){
-              this.messageService.add({
-                key: key,
-                severity: 'error',
-                summary: error
-              })
-            }
-          }
-          return;
-        }
-        const children = this.mediaService.convertDataToTreeNode(apiResult.data, node.key!);
-
-        if (!this.areChildrenEquals(node, children)){
-          node.children = [];
-
-          if (children && children.length > 0) {
-            node.children = children;
-          } else {
-            node.leaf = true;
-          }
-        }
-
-        // node.loading = false;
-        this.cd.markForCheck();
-      },
-      error: (err) => {
-        node.loading = false;
-        this.messageService.add({ severity: 'error', summary: `Server is unavailable`, detail: `try again later` });
-      },
-      complete: () => {
-        node.loading = false;
-      }
-    })
+    node.loading = false;
+    this.cd.markForCheck();
   }
 
   private addNode(node: TreeNode): void {
-    if (this.selectedFolder !== undefined && this.selectedFolder.children !== undefined) {
-      this.selectedFolder.children.push(node);
+    if (this.selectedNode !== undefined && this.selectedNode.children !== undefined) {
+      this.selectedNode.children.push(node);
     }
+  }
+
+  private getDir$(source$: Observable<TreeNode>) {
+    return source$.pipe(
+      switchMap(node => {
+        let path = node.key;
+        if (!path) path = '/';
+
+        return this.mediaService.getDirectory(path).pipe(
+          catchError((error) => {
+            this.messageService.add({ severity: 'error', summary: `Server is unavailable`, detail: `try again later` });
+            return of()
+          })
+        )
+      }),
+      filter((apiResult) => apiResult.succeeded)
+    )
   }
 
   //#endregion
@@ -231,10 +246,10 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   }
 
   protected openDialog(): void {
-    if (!this.selectedFolder)
+    if (!this.selectedNode)
       return;
 
-    const folder = this.selectedFolder.key;
+    const folder = this.selectedNode.key;
     if (!folder)
       return;
 
@@ -273,22 +288,22 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   //#endregion
 
   nodeExpand(event: any) {
-    // this.messageService.add({ severity: 'success', summary: 'Node Expanded', detail: `${event.node.label} | ${event.node.data}` });
-
     const node = event.node as TreeNode;
+    this.expandedNode = node;
+
     if (!node.children) {
-      this.loadNode(node);
+      this.nodeExpanded$.next(node);
     }
   }
 
   nodeCollapse(event: any) {
-    // this.messageService.add({ severity: 'warn', summary: 'Node Collapsed', detail: event.node.label });
+    this.expandedNode = undefined;
   }
 
   nodeSelect(event: any) {
     const node = event.node as TreeNode;
-    // this.loggerService.warn(node.key)
-    this.loadNode(node);
+    this.nodeSelected$.next(node);
+    // this.loadNode(node);
   }
 
   nodeUnselect(event: any) {
