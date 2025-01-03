@@ -16,6 +16,12 @@ $sidebar-width: 263px;
 
 .content {
   grid-area: content;
+  display: flex;
+  flex-direction: column;
+
+  .body-wrapper {
+    flex: 1;
+  }
 }
 
 .layout {

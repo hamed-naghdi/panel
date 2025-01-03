@@ -1,4 +1,4 @@
-export const treeDesignToken = {
+export const treeDesignTokens = {
   root: {
     padding: '0',
     indent: '1rem',

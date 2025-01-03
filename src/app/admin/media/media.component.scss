@@ -1,21 +1,27 @@
 @use "../../../styles/panel/abstracts/variables" as var;
 
-.tree {
-  grid-area: tree;
-  min-height: 100vh;
+:host ::ng-deep {
+  height: 100%;
+  display: block;
 
-  border-right: 1px solid var.$slate-300;
-  background: var.$white;
-}
+  .p-splitter {
+    height: 100%;
+    display: block;
 
-.media {
-  grid-area: media;
-  min-height: 1200px;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .p-splitter-gutter-handle {
+    width: 2px !important;
+  }
+
+  .p-splitterpanel-nested {
+    justify-content: initial !important;
+  }
 }
 
 .wrapper {
-  display: grid;
   $p2: 2 * var.$primary-padding;
-  grid-template-columns: calc(212px + $p2) 1fr;
-  grid-template-areas: 'tree media'
+  height: 100%;
 }

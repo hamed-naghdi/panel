@@ -21,7 +21,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FloatLabelModule} from 'primeng/floatlabel';
 import {Tree} from 'primeng/tree';
 
-import {treeDesignToken} from '../../shared/common/treeDesignToken';
+import {treeDesignTokens} from '../../shared/common/treeDesignTokens';
 import {arraysEqual} from '../../../core/utilities/arrayHelper';
 
 import {MediaService} from '../../../core/services/api/media.service';
@@ -48,7 +48,7 @@ import {IDirectory} from '../../../core/interfaces/media/directory';
   styleUrl: './folder-tree.component.scss'
 })
 export class FolderTreeComponent implements OnInit, OnDestroy {
-  protected readonly treeDesignToken = treeDesignToken;
+  protected readonly treeDesignToken = treeDesignTokens;
 
   visibleCreateFolderDialog: boolean = false;
   pathErrors: string[] = [];
