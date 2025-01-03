@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as var;
+
 h1 {
 
 }
@@ -11,4 +13,17 @@ h3 {
   font-weight: 600;
   line-height: 32px;
   letter-spacing: -0.144px;
+}
+
+small {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.admin-content-title {
+  color: var.$slate-900;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 18px;
 }

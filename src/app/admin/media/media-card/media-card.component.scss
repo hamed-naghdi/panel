@@ -1,0 +1,32 @@
+@use "../../../../styles/panel/abstracts/variables" as var;
+
+$padding: var.$secondary-padding;
+
+.media-card {
+  display: flex;
+  padding: var.$secondary-padding;
+  flex-direction: column;
+  align-items: center;
+  gap: var.$secondary-gap;
+
+  border-radius: 8px;
+  border: 1px solid var.$slate-300;
+  background: var.$white;
+
+  max-width: calc(193px + 2 * $padding);
+
+  .img {
+    width: 100%;
+    max-width: 193px;
+    flex-shrink: 0;
+    mix-blend-mode: multiply;
+  }
+
+  .file-name {
+    color: var.$black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+}

@@ -1,19 +1,27 @@
 import { Component } from '@angular/core';
-import {FolderTreeComponent} from './folder-tree/folder-tree.component';
 import { SplitterModule } from 'primeng/splitter';
-import {style} from '@angular/animations';
-import {Skeleton} from 'primeng/skeleton';
+
+import {FolderTreeComponent} from './folder-tree/folder-tree.component';
+import {MediaListComponent} from './media-list/media-list.component';
+import {IDirectory} from '../../core/interfaces/media/directory';
 
 @Component({
   selector: 'hami-media',
   imports: [
     SplitterModule,
     FolderTreeComponent,
-    Skeleton,
+    MediaListComponent,
   ],
   templateUrl: './media.component.html',
   styleUrl: './media.component.scss'
 })
 export class MediaComponent {
-  protected readonly style = style;
+  dir: IDirectory | undefined;
+
+  constructor() {
+  }
+
+  protected nodeSelected(directory: IDirectory) {
+    this.dir = directory;
+  }
 }

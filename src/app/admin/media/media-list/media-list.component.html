@@ -1,0 +1,12 @@
+<div class="header">
+  <h5 class="admin-content-title">Medien</h5>
+</div>
+  <div class="body">
+    @if (directory) {
+      @for (dir of directory.files; track directory) {
+        <hami-media-card [media]="dir" />
+      }
+    } @else {
+      empty
+    }
+  </div>

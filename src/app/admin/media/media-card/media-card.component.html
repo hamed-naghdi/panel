@@ -1,1 +1,8 @@
-<p>media-card works!</p>
+@if (media) {
+  <div class="media-card">
+    @if (media.fullPath) {
+      <img class="img" [src]="media.fullPath" [alt]="media.fileName" />
+    }
+    <small class="file-name">{{media.fileName}}</small>
+  </div>
+}

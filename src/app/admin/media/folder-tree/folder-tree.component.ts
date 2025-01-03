@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {
   catchError,
@@ -23,6 +23,7 @@ import {Tree} from 'primeng/tree';
 
 import {treeDesignTokens} from '../../shared/common/treeDesignTokens';
 import {arraysEqual} from '../../../core/utilities/arrayHelper';
+import {normalizePath} from '../../../core/utilities/commonHelper';
 
 import {MediaService} from '../../../core/services/api/media.service';
 import {LoggerService} from '../../../core/services/logger.service';
@@ -72,7 +73,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   nodeExpanded$: Subject<TreeNode> = new Subject<TreeNode>();
   nodeExpandedSubscription: Subscription | undefined;
 
-
+  @Output('selectedNode') selectedNodeChange: EventEmitter<IDirectory> = new EventEmitter();
 
 
   constructor(private messageService: MessageService,
@@ -152,11 +153,15 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
     this.nodeSelectedSubscription = this.getDir$(this.nodeSelected$).subscribe({
       next: (apiResult) => {
+        this.selectedNodeChange.emit(apiResult.data);
+
         const node = this.selectedNode;
         if (!node) return;
         this.loadChildren(node, apiResult);
       },
       error: (error) => {
+        this.selectedNodeChange.emit(undefined);
+
         if (this.selectedNode)
           this.selectedNode.loading = false;
 
@@ -188,7 +193,7 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
     return [
       {
         key: '/',
-        label: 'root (/)',
+        label: 'root',
         data: '/',
         icon: 'pi pi-folder',
         leaf: false,
@@ -282,8 +287,8 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   }
 
   private generateFolderPath(newFolderName: string, selectedFolderPath?: string): string {
-    const normalizedPath = selectedFolderPath?.replace(/\/+$/, '') + '/';
-    return `${normalizedPath}${newFolderName}/`
+    // const normalizedPath = selectedFolderPath?.replace(/\/+$/, '') + '/';
+    return `${normalizePath(selectedFolderPath)}${newFolderName}/`
   }
 
   protected onCreateFolderFormSubmit(): void {
@@ -326,5 +331,6 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
   }
 
   nodeUnselect(event: any) {
+    this.selectedNodeChange.emit(undefined);
   }
 }

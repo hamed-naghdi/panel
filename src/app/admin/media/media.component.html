@@ -1,25 +1,11 @@
 <div class="wrapper">
   <p-splitter [panelSizes]="[21.1, 78.9]">
     <ng-template #panel>
-      <hami-folder-tree />
+      <hami-folder-tree (selectedNode)="nodeSelected($event)" />
     </ng-template>
     <ng-template #panel>
-      @defer () {
-        medias
-      } @placeholder (minimum 2s) {
-        <p>Future comments</p>
-      } @loading {
-        <div class="w-full xl:w-6/12 p-4">
-          <p-skeleton styleClass="mb-2" />
-          <p-skeleton styleClass="mb-2" />
-          <p-skeleton styleClass="mb-2" />
-          <p-skeleton styleClass="mb-2" />
-          <p-skeleton styleClass="mb-2" />
-          <p-skeleton width="10rem" styleClass="mb-2" />
-          <p-skeleton width="5rem" styleClass="mb-2" />
-          <p-skeleton height="2rem" styleClass="mb-2" />
-          <p-skeleton width="10rem" height="4rem" />
-        </div>
+      @if (dir) {
+        <hami-media-list [directoryInfo]="dir" />
       }
     </ng-template>
   </p-splitter>
