@@ -5,11 +5,15 @@ import {normalizePath} from '../../../core/utilities/commonHelper';
 import {MediaCardComponent} from '../media-card/media-card.component';
 import {IFile} from '../../../core/interfaces/media/file';
 import {MediaService} from '../../../core/services/api/media.service';
+import {Button} from 'primeng/button';
+import {FileUpload} from 'primeng/fileupload';
 
 @Component({
   selector: 'hami-media-list',
   imports: [
-    MediaCardComponent
+    MediaCardComponent,
+    Button,
+    FileUpload
   ],
   templateUrl: './media-list.component.html',
   styleUrl: './media-list.component.scss'

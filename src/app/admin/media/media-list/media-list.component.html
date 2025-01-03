@@ -1,5 +1,15 @@
 <div class="header">
   <h5 class="admin-content-title">Medien</h5>
+  <div class="upload-controllers">
+    <p-button icon="pi pi-list" severity="secondary" hidden="hidden" />
+    <p-fileupload
+      mode="basic"
+      chooseIcon="pi pi-upload"
+      chooseLabel="Hochladen"
+      accept="image/*"
+      [multiple]="true"
+      [auto]="true" />
+  </div>
 </div>
   <div class="body">
     @if (directory) {

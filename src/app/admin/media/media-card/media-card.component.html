@@ -1,8 +1,12 @@
 @if (media) {
   <div class="media-card">
     @if (media.fullPath) {
-      <img class="img" [src]="media.fullPath" [alt]="media.fileName" />
+      <div class="img-wrapper">
+        <img class="img" [src]="media.fullPath" [alt]="media.fileName" />
+      </div>
     }
-    <small class="file-name">{{media.fileName}}</small>
+    <div class="file-info-wrapper">
+      <small class="file-name">{{media.fileName}}</small>
+    </div>
   </div>
 }
