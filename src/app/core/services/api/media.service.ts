@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpContext, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpContext, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, catchError, tap} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {TreeNode} from 'primeng/api';
@@ -12,6 +12,7 @@ import {LoggerService} from '../logger.service';
 import {ICreateDirectoryResponse} from '../../interfaces/media/createDirectory';
 import {ErrorService} from '../error.service';
 import {normalizePath, removeTrailingSlashes} from '../../utilities/commonHelper';
+import {IUploadRequest, IUploadResponse} from '../../interfaces/media/IUpload';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,22 @@ export class MediaService {
     }
     return this.httpClient
       .post<IApiResult<ICreateDirectoryResponse>>(`media/directory/create`, { path: path }, options).pipe(
+        catchError((error) => this.errorService.catchHttpError(error)),
+      )
+  }
+
+  uploadFiles(uploadRequest: IUploadRequest): Observable<IApiResult<IUploadResponse>> {
+    const formData = new FormData();
+    uploadRequest.files.forEach((file) => {
+      formData.append('files', file);
+    })
+    formData.append('directory', uploadRequest.directory);
+
+    const options = {
+      headers: new HttpHeaders().set('File-Upload', 'true'),
+    }
+    return this.httpClient
+      .post<IApiResult<IUploadResponse>>(`media/upload`, formData, options).pipe(
         catchError((error) => this.errorService.catchHttpError(error)),
       )
   }

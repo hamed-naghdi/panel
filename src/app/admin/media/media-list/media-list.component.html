@@ -3,17 +3,20 @@
   <div class="upload-controllers">
     <p-button icon="pi pi-list" severity="secondary" hidden="hidden" />
     <p-fileupload
-      mode="basic"
+      mode="advanced"
       chooseIcon="pi pi-upload"
       chooseLabel="Hochladen"
       accept="image/*"
       [multiple]="true"
-      [auto]="true" />
+      [auto]="false"
+      [customUpload]="true"
+      (uploadHandler)="uploadFiles($event)"
+    />
   </div>
 </div>
   <div class="body">
     @if (directory) {
-      @for (dir of directory.files; track directory) {
+      @for (dir of directory.files; track dir.id) {
         <hami-media-card [media]="dir" />
       }
     } @else {
