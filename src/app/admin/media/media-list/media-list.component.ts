@@ -1,29 +1,37 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {catchError, exhaustMap, of, Subject, Subscription, tap} from 'rxjs';
+import {FormsModule} from '@angular/forms';
 
 import {Button} from 'primeng/button';
+import {Dialog} from 'primeng/dialog';
 import {FileUpload, FileUploadHandlerEvent} from 'primeng/fileupload';
+import {MessageService} from 'primeng/api';
 
 import {IDirectory} from '../../../core/interfaces/media/directory';
 import {normalizePath} from '../../../core/utilities/commonHelper';
 import {MediaCardComponent} from '../media-card/media-card.component';
 import {IFile} from '../../../core/interfaces/media/file';
+import {IUploadRequest, IUploadResponse} from '../../../core/interfaces/media/IUpload';
 import {MediaService} from '../../../core/services/api/media.service';
-import {IUploadRequest} from '../../../core/interfaces/media/IUpload';
+import {ErrorService} from '../../../core/services/error.service';
+import {isApiResult} from '../../../core/utilities/apiTypeGuard';
+import {IApiResult, IServerSideError} from '../../../core/interfaces/apiResult';
+import IErrorDescriber from '../../../core/interfaces/errorDescriber';
 
 @Component({
   selector: 'hami-media-list',
   imports: [
     MediaCardComponent,
     Button,
-    FileUpload
+    FileUpload,
+    Dialog,
+    FormsModule
   ],
   templateUrl: './media-list.component.html',
   styleUrl: './media-list.component.scss'
 })
 export class MediaListComponent implements OnInit, OnDestroy {
   private _directory: IDirectory | undefined;
-
   @Input('directoryInfo')
   get directory(): IDirectory | undefined {
     return this._directory;
@@ -46,27 +54,41 @@ export class MediaListComponent implements OnInit, OnDestroy {
     };
   }
 
+  @ViewChild(FileUpload, { read : FileUpload }) uploader: FileUpload | undefined;
+  protected visibleDialog: boolean = false;
+
   upload$: Subject<IUploadRequest> = new Subject<IUploadRequest>();
   uploadSubscription: Subscription | undefined;
 
-  constructor(private mediaService: MediaService) {
+  constructor(private mediaService: MediaService,
+              private errorService: ErrorService,
+              private messageService: MessageService,) {
   }
 
   ngOnInit(): void {
     this.upload$.pipe(
-      // tap(x => console.log(x)),
       exhaustMap((uploadRequest) => {
         return this.mediaService.uploadFiles(uploadRequest).pipe(
           catchError((error) => {
-            console.log(error);
-
+            this.handleUploadErrors(error);
             return of()
           })
         );
       })
     ).subscribe({
-      next: data => {},
-      error: err => {},
+      next: apiResult => {
+        if (!apiResult.succeeded)
+          return;
+
+        if (apiResult.data)
+          this.showUploadedFiles(apiResult.data, this.uploader!.files)
+
+        this.hideDialog();
+        this.messageService.add({ severity: 'success', summary: `files uploaded successfully` });
+      },
+      error: error => {
+        this.handleUploadErrors(error);
+      },
       complete: () => {}
     })
   }
@@ -75,6 +97,15 @@ export class MediaListComponent implements OnInit, OnDestroy {
     if (this.uploadSubscription) {
       this.uploadSubscription.unsubscribe();
     }
+  }
+
+  showDialog(): void {
+    this.visibleDialog = true;
+  }
+
+  hideDialog(): void {
+    this.uploader?.clear();
+    this.visibleDialog = false;
   }
 
   uploadFiles(event: FileUploadHandlerEvent): void {
@@ -87,4 +118,74 @@ export class MediaListComponent implements OnInit, OnDestroy {
 
     this.upload$.next(request);
   }
+
+  showUploadedFiles(apiFiles: IUploadResponse[], files: File[]): void {
+    const result: IFile[] = apiFiles.map((file, index) => {
+      return {
+        id: file.id,
+        size: files[index].size,
+        fileName: files[index].name,
+        fullPath: this.mediaService.getMediaDownloadLink(file.filePath)
+      }
+    })
+    this.directory?.files?.push(...result);
+  }
+
+  //#region errors
+
+  handleUploadErrors(error: any): void  {
+    this.errorService.notifyErrors(error);
+    const extractedErrors = this.processErrors(error)
+    if (extractedErrors) {
+      type errorMessageType = {
+        severity: string,
+        summary: string,
+        detail?: string,
+      }
+      const errorMessages: errorMessageType[] = []
+      for (const key in extractedErrors) {
+        errorMessages.push({
+          severity: 'error',
+          summary: key,
+          detail: extractedErrors[key]
+        })
+      }
+      this.messageService.addAll(errorMessages);
+    }
+  }
+
+  processErrors(error: any) {
+    if (error.error instanceof ErrorEvent || !isApiResult(error.error))
+      return;
+
+    const serverError = error.error as IApiResult<any>;
+    const apiErrors: IServerSideError | undefined = serverError.errors;
+    if (!apiErrors)
+      return;
+
+    type extractedErrors = { [key: string]: string };
+    const extractedErrors: extractedErrors = {};
+
+    for (let key in apiErrors) {
+      const errorDescribers: IErrorDescriber[] = apiErrors[key]
+      if (key.startsWith('Files[')) {
+        const fileIndex = this.extractFileIndex(key);
+        if (fileIndex !== null && this.uploader?.files[fileIndex]){
+          const file = this.uploader?.files[fileIndex];
+          extractedErrors[file?.name] = errorDescribers.map(e => e.description).join('\n ')
+        }
+      } else if (key === 'Directory') {
+        extractedErrors[key] = errorDescribers.map(e => e.description).join('\n ')
+      }
+    }
+
+    return extractedErrors;
+  }
+
+  extractFileIndex(key: string): number | null {
+    const match = key.match(/Files\[(\d+)]/);
+    return match ? parseInt(match[1], 10) : null;
+  }
+
+  //#endregion
 }

@@ -3,12 +3,8 @@ export interface IUploadRequest {
   directory: string;
 }
 
-interface IUploadedFileResponse {
+export interface IUploadResponse {
   id: number;
   filePath: string;
   success: boolean;
-}
-
-export interface IUploadResponse {
-  files: IUploadedFileResponse[];
 }

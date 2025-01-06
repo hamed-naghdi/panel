@@ -8,7 +8,6 @@ import {environment} from '../../../../environments/environment';
 import {IDirectory} from '../../interfaces/media/directory';
 import {IApiResult} from '../../interfaces/apiResult';
 import {SkipLoading} from '../../interceptors/loading.interceptor';
-import {LoggerService} from '../logger.service';
 import {ICreateDirectoryResponse} from '../../interfaces/media/createDirectory';
 import {ErrorService} from '../error.service';
 import {normalizePath, removeTrailingSlashes} from '../../utilities/commonHelper';
@@ -20,7 +19,6 @@ import {IUploadRequest, IUploadResponse} from '../../interfaces/media/IUpload';
 export class MediaService {
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly loggerService: LoggerService,
               private readonly errorService: ErrorService,) {
   }
 
@@ -60,7 +58,7 @@ export class MediaService {
       )
   }
 
-  uploadFiles(uploadRequest: IUploadRequest): Observable<IApiResult<IUploadResponse>> {
+  uploadFiles(uploadRequest: IUploadRequest): Observable<IApiResult<IUploadResponse[]>> {
     const formData = new FormData();
     uploadRequest.files.forEach((file) => {
       formData.append('files', file);
@@ -71,15 +69,20 @@ export class MediaService {
       headers: new HttpHeaders().set('File-Upload', 'true'),
     }
     return this.httpClient
-      .post<IApiResult<IUploadResponse>>(`media/upload`, formData, options).pipe(
+      .post<IApiResult<IUploadResponse[]>>(`media/upload`, formData, options).pipe(
         catchError((error) => this.errorService.catchHttpError(error)),
       )
   }
 
-  getMediaLink(directory: string, fileName: string): string {
-    const relativePath = normalizePath('/media/download/', directory, fileName);
+  getMediaDownloadLink(filePath: string){
+    const relativePath = normalizePath('/media/download', filePath);
     const path = removeTrailingSlashes(relativePath);
     return `${environment.apiUrl}${path}`;
+  }
+
+  getMediaLink(directory: string, fileName: string): string {
+    const relativePath = normalizePath(directory, fileName);
+    return this.getMediaDownloadLink(relativePath);
   }
 
   // private handleError() {

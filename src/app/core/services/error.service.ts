@@ -3,7 +3,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {MessageService} from 'primeng/api';
 
-import {IApiResult, IServerError} from '../interfaces/apiResult';
+import {IApiResult, IServerSideError} from '../interfaces/apiResult';
 import {isApiResult} from '../utilities/apiTypeGuard';
 import {FormGroup} from '@angular/forms';
 import IErrorDescriber from '../interfaces/errorDescriber';
@@ -35,7 +35,7 @@ export class ErrorService {
       return;
 
     const serverError = error.error as IApiResult<any>;
-    const apiErrors: IServerError | undefined = serverError.errors;
+    const apiErrors: IServerSideError | undefined = serverError.errors;
     if (!apiErrors)
       return;
 

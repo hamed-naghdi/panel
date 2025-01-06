@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} f
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {
   catchError,
-  distinctUntilChanged,
   exhaustMap,
   Observable,
   of,
@@ -26,7 +25,6 @@ import {arraysEqual} from '../../../core/utilities/arrayHelper';
 import {normalizePath} from '../../../core/utilities/commonHelper';
 
 import {MediaService} from '../../../core/services/api/media.service';
-import {LoggerService} from '../../../core/services/logger.service';
 import {ErrorService} from '../../../core/services/error.service';
 import {FormService} from '../../../core/services/form.service';
 import {IApiResult} from '../../../core/interfaces/apiResult';
@@ -78,7 +76,6 @@ export class FolderTreeComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
               private mediaService: MediaService,
-              private loggerService: LoggerService,
               private errorService: ErrorService,
               private formService: FormService,
               private cd: ChangeDetectorRef) {

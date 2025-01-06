@@ -1,11 +1,16 @@
-<div class="header">
-  <h5 class="admin-content-title">Medien</h5>
+<p-dialog
+  [position]="'top'"
+  [modal]="true"
+  [(visible)]="visibleDialog"
+>
   <div class="upload-controllers">
     <p-button icon="pi pi-list" severity="secondary" hidden="hidden" />
-    <p-fileupload
+    <p-fileupload #uploader
       mode="advanced"
-      chooseIcon="pi pi-upload"
-      chooseLabel="Hochladen"
+      chooseIcon="pi pi-plus"
+      chooseLabel="Choose"
+      uploadIcon="pi pi-upload"
+      uploadLabel="Hochladen"
       accept="image/*"
       [multiple]="true"
       [auto]="false"
@@ -13,9 +18,17 @@
       (uploadHandler)="uploadFiles($event)"
     />
   </div>
+</p-dialog>
+
+<div class="header">
+  <h5 class="admin-content-title">Medien</h5>
+  <p-button (onClick)="showDialog()">
+    <i class="pi pi-upload"></i>
+    Hochladen
+  </p-button>
 </div>
   <div class="body">
-    @if (directory) {
+    @if (directory && directory.files && directory.files.length > 0) {
       @for (dir of directory.files; track dir.id) {
         <hami-media-card [media]="dir" />
       }
