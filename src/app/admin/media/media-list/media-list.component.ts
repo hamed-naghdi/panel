@@ -168,13 +168,13 @@ export class MediaListComponent implements OnInit, OnDestroy {
 
     for (let key in apiErrors) {
       const errorDescribers: IErrorDescriber[] = apiErrors[key]
-      if (key.startsWith('Files[')) {
+      if (key.startsWith('files[')) {
         const fileIndex = this.extractFileIndex(key);
         if (fileIndex !== null && this.uploader?.files[fileIndex]){
           const file = this.uploader?.files[fileIndex];
           extractedErrors[file?.name] = errorDescribers.map(e => e.description).join('\n ')
         }
-      } else if (key === 'Directory') {
+      } else if (key === 'directory') {
         extractedErrors[key] = errorDescribers.map(e => e.description).join('\n ')
       }
     }
@@ -183,7 +183,7 @@ export class MediaListComponent implements OnInit, OnDestroy {
   }
 
   extractFileIndex(key: string): number | null {
-    const match = key.match(/Files\[(\d+)]/);
+    const match = key.match(/files\[(\d+)]/);
     return match ? parseInt(match[1], 10) : null;
   }
 
