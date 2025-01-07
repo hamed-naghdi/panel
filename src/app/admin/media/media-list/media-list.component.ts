@@ -174,7 +174,7 @@ export class MediaListComponent implements OnInit, OnDestroy {
           const file = this.uploader?.files[fileIndex];
           extractedErrors[file?.name] = errorDescribers.map(e => e.description).join('\n ')
         }
-      } else if (key === 'directory') {
+      } else {
         extractedErrors[key] = errorDescribers.map(e => e.description).join('\n ')
       }
     }

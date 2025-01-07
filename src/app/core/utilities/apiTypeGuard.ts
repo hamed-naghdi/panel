@@ -7,7 +7,7 @@ export function isApiResult(obj: any): obj is IApiResult<any> {
     typeof obj.succeeded === 'boolean' &&
     typeof obj.httpStatusCode === 'number' &&
     ('data' in obj) &&
-    ('message' in obj ? typeof obj.message === 'string' : true) &&
+    ('message' in obj) &&
     ('errors' in obj)
   )
 }

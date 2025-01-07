@@ -56,10 +56,11 @@ export class ErrorService {
     } else {
       // server-side error
       if (!isApiResult(error.error)) {
-        messages.push({ severity: 'error', summary: 'Server is unavailable', detail: `try again later` });
+        messages.push({ severity: 'error', summary: 'Unknown Error occurred', detail: `try again later` });
       } else {
         const serverError = error.error as IApiResult<any>;
-        messages.push({ severity: 'error', summary: serverError.message })
+        if (serverError.message)
+          messages.push({ severity: 'error', summary: serverError.message })
       }
     }
 

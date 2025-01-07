@@ -27,6 +27,14 @@ export const adminRoutes: Routes = [
           breadcrumb: 'Medien',
           search: true,
         },
+      },
+      {
+        path: 'pages',
+        loadComponent: () => import('./cms/pages/pages.component').then(m => m.PagesComponent),
+        data: {
+          breadcrumb: 'Seiten',
+          search: true,
+        },
       }
     ]
   },
