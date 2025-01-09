@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import {TreeNode} from 'primeng/api';
-import {Template} from '../../core/interfaces/cms/enums/templateEnum';
+import {TemplateEnum} from '../../core/interfaces/cms/enums/templateEnum';
 
 @Component({
   selector: 'hami-dashboard',
@@ -15,7 +15,7 @@ import {Template} from '../../core/interfaces/cms/enums/templateEnum';
 })
 export class DashboardComponent implements OnInit {
 
-  template: Template | undefined;
+  template: TemplateEnum | undefined;
 
   // files: TreeNode[] = [
   //   {
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   // ];
 
   constructor() {
-    this.template = Template.fromDisplayName('Home');
+    this.template = TemplateEnum.fromDisplayName('Home');
   }
 
   ngOnInit(): void {
