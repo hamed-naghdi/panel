@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import IErrorDescriber from '../interfaces/errorDescriber';
+import IErrorDescriber from '../models/errorDescriber';
 
 @Injectable({
   providedIn: 'root'

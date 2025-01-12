@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Subscription} from 'rxjs';
 
-import {IBreadcrumb} from '../../../../core/interfaces/breadcrumb';
+import {IBreadcrumb} from '../../../../core/models/breadcrumb';
 import {BreadcrumbService} from '../../../../core/services/breadcrumb.service';
 import {NgOptimizedImage} from '@angular/common';
 

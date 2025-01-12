@@ -27,8 +27,8 @@ import {normalizePath} from '../../../core/utilities/commonHelper';
 import {MediaService} from '../../../core/services/api/media.service';
 import {ErrorService} from '../../../core/services/error.service';
 import {FormService} from '../../../core/services/form.service';
-import {IApiResult} from '../../../core/interfaces/apiResult';
-import {IDirectory} from '../../../core/interfaces/media/directory';
+import {IApiResult} from '../../../core/models/apiResult';
+import {IDirectory} from '../../../core/models/media/directory';
 
 @Component({
   selector: 'hami-folder-tree',

@@ -9,7 +9,7 @@
 //   TemplateRef,
 //   ViewContainerRef
 // } from '@angular/core';
-// import {IBreadcrumb, IBreadcrumbContext} from '../interfaces/breadcrumb';
+// import {IBreadcrumb, IBreadcrumbContext} from '../models/breadcrumb';
 //
 // @Directive({
 //   selector: '[hamiBreadcrumb]'

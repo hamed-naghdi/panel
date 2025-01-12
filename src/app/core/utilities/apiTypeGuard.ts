@@ -1,5 +1,5 @@
-import {IApiResult} from '../interfaces/apiResult';
-import IErrorDescriber from '../interfaces/errorDescriber';
+import {IApiResult} from '../models/apiResult';
+import IErrorDescriber from '../models/errorDescriber';
 
 export function isApiResult(obj: any): obj is IApiResult<any> {
   return (

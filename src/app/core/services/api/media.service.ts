@@ -5,13 +5,13 @@ import {delay} from 'rxjs/operators';
 import {TreeNode} from 'primeng/api';
 
 import {environment} from '../../../../environments/environment';
-import {IDirectory} from '../../interfaces/media/directory';
-import {IApiResult} from '../../interfaces/apiResult';
+import {IDirectory} from '../../models/media/directory';
+import {IApiResult} from '../../models/apiResult';
 import {SkipLoading} from '../../interceptors/loading.interceptor';
-import {ICreateDirectoryResponse} from '../../interfaces/media/createDirectory';
+import {ICreateDirectoryResponse} from '../../models/media/createDirectory';
 import {ErrorService} from '../error.service';
 import {normalizePath, removeTrailingSlashes} from '../../utilities/commonHelper';
-import {IUploadRequest, IUploadResponse} from '../../interfaces/media/IUpload';
+import {IUploadRequest, IUploadResponse} from '../../models/media/IUpload';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { SplitterModule } from 'primeng/splitter';
 
 import {FolderTreeComponent} from './folder-tree/folder-tree.component';
 import {MediaListComponent} from './media-list/media-list.component';
-import {IDirectory} from '../../core/interfaces/media/directory';
+import {IDirectory} from '../../core/models/media/directory';
 
 @Component({
   selector: 'hami-media',

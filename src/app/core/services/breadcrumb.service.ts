@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
-import {IBreadcrumb} from '../interfaces/breadcrumb';
+import {IBreadcrumb} from '../models/breadcrumb';
 
 @Injectable({
   providedIn: 'root'

@@ -7,16 +7,16 @@ import {Dialog} from 'primeng/dialog';
 import {FileUpload, FileUploadHandlerEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
 
-import {IDirectory} from '../../../core/interfaces/media/directory';
+import {IDirectory} from '../../../core/models/media/directory';
 import {normalizePath} from '../../../core/utilities/commonHelper';
 import {MediaCardComponent} from '../media-card/media-card.component';
-import {IFile} from '../../../core/interfaces/media/file';
-import {IUploadRequest, IUploadResponse} from '../../../core/interfaces/media/IUpload';
+import {IFile} from '../../../core/models/media/file';
+import {IUploadRequest, IUploadResponse} from '../../../core/models/media/IUpload';
 import {MediaService} from '../../../core/services/api/media.service';
 import {ErrorService} from '../../../core/services/error.service';
 import {isApiResult} from '../../../core/utilities/apiTypeGuard';
-import {IApiResult, IServerSideError} from '../../../core/interfaces/apiResult';
-import IErrorDescriber from '../../../core/interfaces/errorDescriber';
+import {IApiResult, IServerSideError} from '../../../core/models/apiResult';
+import IErrorDescriber from '../../../core/models/errorDescriber';
 
 @Component({
   selector: 'hami-media-list',

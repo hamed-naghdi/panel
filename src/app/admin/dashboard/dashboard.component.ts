@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import {TreeNode} from 'primeng/api';
-import {TemplateEnum} from '../../core/interfaces/cms/enums/templateEnum';
+import {TemplateEnum} from '../../core/models/cms/enums/templateEnum';
 
 @Component({
   selector: 'hami-dashboard',

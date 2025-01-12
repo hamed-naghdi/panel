@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import {LoadingIndicatorComponent} from './shared/loading-indicator/loading-indicator.component';
 
 // import {BreadcrumbDirective} from './core/directives/breadcrumb.directive';
-// import {IBreadcrumb} from './core/interfaces/breadcrumb';
+// import {IBreadcrumb} from './core/models/breadcrumb';
 
 @Component({
   selector: 'hami-root',

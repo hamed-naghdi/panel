@@ -3,10 +3,10 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {MessageService} from 'primeng/api';
 
-import {IApiResult, IServerSideError} from '../interfaces/apiResult';
+import {IApiResult, IServerSideError} from '../models/apiResult';
 import {isApiResult} from '../utilities/apiTypeGuard';
 import {FormGroup} from '@angular/forms';
-import IErrorDescriber from '../interfaces/errorDescriber';
+import IErrorDescriber from '../models/errorDescriber';
 import {FormService} from './form.service';
 
 @Injectable({
